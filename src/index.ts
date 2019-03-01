@@ -1,3 +1,4 @@
+import { exec } from 'child_process';
 import { htmlToPdfRouteHandler } from './htmlToPdfRouteHandler';
 import * as express from 'express';
 import * as cors from 'cors';
@@ -16,6 +17,10 @@ app.use(json());
 app.use(cors());
 
 app.get('/html/pdf', htmlToPdfRouteHandler);
+
+app.get('/kill', () => {
+    process.exit();
+});
 
 app.listen(PORT, () => {
     console.log(
