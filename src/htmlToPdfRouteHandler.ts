@@ -2,7 +2,6 @@ import { RequestHandler } from 'express';
 import { ERROR_WRONG_URL } from './config';
 import { getConvertedFile } from './getConvertedFile';
 
-
 export const htmlToPdfRouteHandler: RequestHandler = async (
     { query: { url, download, nocache } },
     res,
