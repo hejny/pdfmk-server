@@ -8,29 +8,29 @@ import { CACHE_DIR, AWS_S3_BUCKET_NAME } from './config';
 const slimerJS = require('slimerjs');
 const PDF_SLIMER_SCRIPT = path.join(__dirname, 'slimerPDF.js');
 
-export async function getConvertedFile(url: string,nocache=false): Promise<any>{
-    const pdfKey = parse(url).hostname + '/' +url.split('/').join('-');
+export async function getConvertedFile(
+    url: string,
+    nocache = false,
+): Promise<any> {
+    const pdfKey = parse(url).hostname + '/' + url.split('/').join('-');
     const hash = createHash('sha256')
         .update(url)
         .digest('hex');
 
     const pdfCachePath = path.join(__dirname, '..', CACHE_DIR!, `${hash}.pdf`);
-    
 
-    try{
-        if(nocache){
+    try {
+        if (nocache) {
             throw new Error(`No cache`);
         }
-    const { Body, ContentType } = await s3
-        .getObject({
-            Bucket: AWS_S3_BUCKET_NAME,
-            Key: pdfKey,
-        })
-        .promise();
+        const { Body, ContentType } = await s3
+            .getObject({
+                Bucket: AWS_S3_BUCKET_NAME,
+                Key: pdfKey,
+            })
+            .promise();
         return Body;
-
-    }catch(error){
-
+    } catch (error) {
         //todo is existsSync OK?
 
         try {
@@ -48,13 +48,13 @@ export async function getConvertedFile(url: string,nocache=false): Promise<any>{
 
         const pdfFile = readFileSync(pdfCachePath);
         await s3
-        .upload({
-            Bucket: AWS_S3_BUCKET_NAME,
-            Key: pdfKey,
-            ContentType: 'application/pdf',
-            Body: pdfFile,
-        })
-        .promise();
+            .upload({
+                Bucket: AWS_S3_BUCKET_NAME,
+                Key: pdfKey,
+                ContentType: 'application/pdf',
+                Body: pdfFile,
+            })
+            .promise();
         unlinkSync(pdfCachePath);
         return pdfFile;
     }

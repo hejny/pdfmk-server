@@ -10,4 +10,4 @@ export const {
     ERROR_WRONG_URL,
 } = process.env;
 
-export const  AWS_S3_BUCKET_NAME = _AWS_S3_BUCKET_NAME||'untitled';
+export const AWS_S3_BUCKET_NAME = _AWS_S3_BUCKET_NAME || 'untitled';
