@@ -9,7 +9,9 @@
         "prettier-watch": "onchange \"**/*.{js,ts,tsx,json,css}\" -- prettier --config .prettierrc --write \"{{changed}}\"",
         "server": "ts-node -P ./tsconfig.json -r dotenv/config src/index.ts",
         "server-watch": "onchange -i \"./src/**/*.{ts,tsx,js,json}\" -- npm run server",
-        "server-test-storage": "ts-node -P ./tsconfig.json -r dotenv/config src/storage.ts"
+        "preconvert": "ts-node -P ./tsconfig.json -r dotenv/config src/preconvert.ts",
+        "test-storage": "ts-node -P ./tsconfig.json -r dotenv/config src/storage.ts"
+
     },
     "dependencies": {
         "@types/uuid": "^3.4.4",

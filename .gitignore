@@ -9,3 +9,5 @@
 /cache
 
 .env
+
+preconvert.txt
