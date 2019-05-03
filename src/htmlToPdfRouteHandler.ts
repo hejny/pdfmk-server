@@ -18,6 +18,7 @@ export const htmlToPdfRouteHandler: RequestHandler = async (
         res.send(content);
     } catch (error) {
         //todo handle other type of errors
+        console.error(error);
         res.status(404).send(ERROR_WRONG_URL);
         //next(error);
     }

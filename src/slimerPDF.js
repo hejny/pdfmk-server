@@ -44,6 +44,16 @@ page.onConsoleMessage = function(message, line, file, level, functionName) {
             line,
     );
 };
+page.onResourceError = function({
+    id,
+    url,
+    errorCode,
+    errorString,
+    status,
+    statusText,
+}) {
+    console.error(id, url, errorCode, errorString, status, statusText);
+};
 
 try {
     // page.open('file://' + certificateURL, function(status) {
