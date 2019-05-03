@@ -1,4 +1,3 @@
-import { exec } from 'child_process';
 import { htmlToPdfRouteHandler } from './htmlToPdfRouteHandler';
 import * as express from 'express';
 import * as cors from 'cors';

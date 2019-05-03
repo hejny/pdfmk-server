@@ -7,8 +7,9 @@ var usage = 'Usage: phantomjs ./phantom.js certificateURL.html destination.pdf';
 phantom.onError = onErrorID('phantom');
 page.onError = onErrorID('page');
 
-var certificateURL = system.args[1];
-var destination = system.args[2];
+var certificateURL = system.args[system.args.length - 2];
+var destination = system.args[system.args.length - 1];
+var renderOnCallback = system.args.includes('--render-on-callback');
 var consoleLogs = [];
 
 if (!certificateURL) {
@@ -24,6 +25,7 @@ page.viewportSize = {
     height: VIEWPORT_SIZE,
 };
 page.paperSize = {
+    // TODO: Make configurable
     format: 'A4',
     orientation: 'portrait',
     margin: '0.25cm',
@@ -56,22 +58,30 @@ page.onResourceError = function({
 };
 
 try {
-    // page.open('file://' + certificateURL, function(status) {
-    console.log(certificateURL);
+    console.debug('Rendering URL', certificateURL);
     page.open(certificateURL, function(status) {
         if (status !== 'success') {
             onErrorID('load finished')(status);
         }
-        // page.onCallback = function() {
-        console.log('Rendering');
-        page.render(destination, { format: 'pdf' });
-        console.log(destination);
-        page.close();
-        slimer.exit();
-        // };
+        if (renderOnCallback) {
+            page.onCallback = function() {
+                render(page, destination);
+            };
+        } else {
+            render(page, destination);
+        }
     });
 } catch (error) {
     onErrorID('run')(error);
+}
+
+function render(page, destination) {
+    console.log('Rendering');
+    page.render(destination, { format: 'pdf' });
+    console.log(destination);
+    console.debug(consoleLogs);
+    page.close();
+    slimer.exit();
 }
 
 function onErrorID(id) {
