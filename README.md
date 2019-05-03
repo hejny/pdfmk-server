@@ -1,5 +1,12 @@
 # PDF Maker
 
+## Endpoints
+- `GET /html/pdf`
+- Parameters:
+  - `url` URL string, can be encoded (for URLs with query parameters)
+  - `nocache` Whether to serve cached PDF
+  - `renderOnCallback` Whether should SlimerJS wait for [`window.callPhantom()`](https://docs.slimerjs.org/current/api/webpage.html#oncallback)
+
 ## todo
 
 - installation
