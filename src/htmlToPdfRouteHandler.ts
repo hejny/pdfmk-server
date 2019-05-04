@@ -3,21 +3,26 @@ import { ERROR_WRONG_URL } from './config';
 import { getConvertedFile } from './getConvertedFile';
 
 export const htmlToPdfRouteHandler: RequestHandler = async (
-    { query: { url, download, nocache } },
+    { query: { url, download, nocache, renderOnCallback } },
     res,
     next,
 ) => {
     try {
-        const content = await getConvertedFile(url, nocache!!);
+        // TODO: Pass file name in query parameters
+        const content = await getConvertedFile(
+            decodeURIComponent(url),
+            nocache,
+            renderOnCallback,
+        );
         res.contentType('application/pdf');
-        //todo download or view
         res.header(
             'Content-disposition',
-            `${download ? `attachment; filename="${download}.pdf"` : 'inline'}`,
+            `${download ? `attachment"` : 'inline'}; filename="${download}.pdf`,
         );
         res.send(content);
     } catch (error) {
         //todo handle other type of errors
+        console.error(error);
         res.status(404).send(ERROR_WRONG_URL);
         //next(error);
     }

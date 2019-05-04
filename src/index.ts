@@ -1,4 +1,3 @@
-import { exec } from 'child_process';
 import { htmlToPdfRouteHandler } from './htmlToPdfRouteHandler';
 import * as express from 'express';
 import * as cors from 'cors';
@@ -11,10 +10,18 @@ if (typeof process.env.SLIMERJSLAUNCHER === 'undefined') {
     );
 }
 
+process.on('unhandledRejection', (err) => {
+    console.error(err);
+});
+
 const app = express();
 
 app.use(json());
 app.use(cors());
+
+app.use((err: any, req: any, res: any, next: any) => {
+    console.error(err);
+});
 
 app.get('/html/pdf', htmlToPdfRouteHandler);
 
