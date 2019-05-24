@@ -57,17 +57,19 @@ page.onResourceError = function({
     console.error(id, url, errorCode, errorString, status, statusText);
 };
 
+if (renderOnCallback) {
+    page.onCallback = function() {
+        render(page, destination);
+    };
+}
+
 try {
     console.debug('Rendering URL', certificateURL);
     page.open(certificateURL, function(status) {
         if (status !== 'success') {
             onErrorID('load finished')(status);
         }
-        if (renderOnCallback) {
-            page.onCallback = function() {
-                render(page, destination);
-            };
-        } else {
+        if (!renderOnCallback) {
             render(page, destination);
         }
     });
