@@ -1,4 +1,5 @@
-//todo check config here - convert to getConfig
+//todo use here configchecker
+
 export const {
     PORT,
     SLIMERJSLAUNCHER,

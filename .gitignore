@@ -3,7 +3,10 @@
 # dependencies
 /node_modules
 
+# IDEs
 .idea
+.vscode/*
+!.vscode/terminals.json
 
 /bin
 /cache
