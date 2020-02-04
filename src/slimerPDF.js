@@ -1,4 +1,4 @@
-//todo purge from certificate logic
+//TODO: purge from certificate logic
 var page = require('webpage').create();
 var system = require('system');
 

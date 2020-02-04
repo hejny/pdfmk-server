@@ -7,6 +7,7 @@
   - `nocache` Whether to serve cached PDF
   - `renderOnCallback` Whether should SlimerJS wait for [`window.callPhantom()`](https://docs.slimerjs.org/current/api/webpage.html#oncallback)
 
+/*
 ## todo
 
 - installation
@@ -24,3 +25,4 @@
 
 https://s3.console.aws.amazon.com/s3/buckets/
 https://console.aws.amazon.com/iam/home#/security_credentials
+*/

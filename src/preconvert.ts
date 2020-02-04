@@ -36,5 +36,5 @@ async function preconvert() {
     const preconvertTextAppex = urls.join('\n');
     writeFileSync(preconvertFilename, preconvertTextAppex);
 
-    preconvert(); //todo is this tail recursion memory optimal?
+    preconvert(); //TODO: is this tail recursion memory optimal?
 }

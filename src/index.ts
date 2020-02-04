@@ -4,12 +4,6 @@ import * as cors from 'cors';
 import { json } from 'body-parser';
 import { PORT } from './config';
 
-if (typeof process.env.SLIMERJSLAUNCHER === 'undefined') {
-    throw new Error(
-        'SLIMERJSLAUNCHER environment variable must be set to a Firefox 59.0 executable',
-    );
-}
-
 process.on('unhandledRejection', (err) => {
     console.error(err);
 });
