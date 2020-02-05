@@ -1,6 +1,6 @@
 import { s3 } from './storage';
 import * as path from 'path';
-import { execute } from './tools/execute';
+import { execute } from './utils/execute';
 import { createHash } from 'crypto';
 import { parse } from 'url';
 import { readFileSync, unlinkSync } from 'fs';

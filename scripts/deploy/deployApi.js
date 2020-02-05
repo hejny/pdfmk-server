@@ -14,8 +14,7 @@ export async function deployApi(remote) {
     await uploadFilesToSsh(remote.credentials, path.join(__dirname, '..', '..'), remoteDir, [
         'src',
         'test',
-        'googleDocsToWordpress.sh',
-        '.npmrc',
+        'pdfMaker.sh',
         'jest.config.js',
         'package.json',
         'package-lock.json',
