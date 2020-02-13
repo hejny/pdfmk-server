@@ -31,29 +31,10 @@ page.paperSize = {
     margin: '0.25cm',
 };
 page.onConsoleMessage = function(message, line, file, level, functionName) {
-    const messageString = ['string', 'number'].includes(typeof message)
-        ? message
-        : JSON.stringify(message, null, 2);
-    consoleLogs.push(
-        level.toUpperCase() +
-            ': ' +
-            messageString +
-            '\n' +
-            functionName +
-            ' in ' +
-            file +
-            ' at ' +
-            line,
-    );
+    const messageString = ['string', 'number'].includes(typeof message) ? message : JSON.stringify(message, null, 2);
+    consoleLogs.push(level.toUpperCase() + ': ' + messageString + '\n' + functionName + ' in ' + file + ' at ' + line);
 };
-page.onResourceError = function({
-    id,
-    url,
-    errorCode,
-    errorString,
-    status,
-    statusText,
-}) {
+page.onResourceError = function({ id, url, errorCode, errorString, status, statusText }) {
     console.error(id, url, errorCode, errorString, status, statusText);
 };
 

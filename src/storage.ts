@@ -1,10 +1,5 @@
 import { config, S3 } from 'aws-sdk';
-import {
-    AWS_ACCESS_KEY_ID,
-    AWS_SECRET_ACCESS_KEY,
-    AWS_REGION,
-    AWS_S3_BUCKET_NAME,
-} from './config';
+import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_S3_BUCKET_NAME } from './config';
 import * as uuid from 'uuid';
 
 config.update({
@@ -37,9 +32,9 @@ async function testStorage() {
         .promise();
 
     if ((Body as Buffer).toString() === testSalt) {
-        console.log(`S3 Storage is working correctly!`);
+        //console.info(`S3 Storage is working correctly!`);
     } else {
-        console.log(`S3 Storage is probbably NOT working correctly!`);
+        console.warn(`S3 Storage is probbably NOT working correctly!`);
     }
 
     await s3
