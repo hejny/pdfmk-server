@@ -2,12 +2,19 @@ import { readFileSync } from 'fs';
 import puppeteer from 'puppeteer';
 
 export async function generatePDF(url: string, filePath: string, renderOnCallback?: string): Promise<Buffer> {
-    //try {
+    try {
 
 
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch(/*{executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"}*/);
         const page = await browser.newPage();
-        await page.goto(url, {waitUntil: ['networkidle2'/*,'domcontentloaded'*/]});
+        await page.setBypassCSP(true);
+
+
+        //{waitUntil: ['networkidle2'/*,'domcontentloaded'*/]}
+        await page.goto(url, {
+            waitUntil: 'load',
+            timeout: 10000 // TODO: Configurable
+        });
         if(renderOnCallback){
 
             // TODO: This is a bit hack can it be done somehow better?
@@ -31,8 +38,13 @@ export async function generatePDF(url: string, filePath: string, renderOnCallbac
 
         // TODO: Delete cache files
 
-    /*} catch (error) {
+    } catch (error) {
         console.error(error);
-        throw new Error(`Error when creating`);
-    }*/
+        if(error.message.includes('waiting for selector ".renderNow" failed')){
+            throw new Error(`Probbably not called window.${renderOnCallback} inside the rendered page "${url}".`);
+        }else{
+            throw error;
+        }
+
+    }
 }
