@@ -2,26 +2,26 @@ import { execute } from '../utils/execute';
 import { readFileSync } from 'fs';
 import path from 'path';
 import { compatiblePath } from '../utils/compatiblePath';
-import { SLIMERJSLAUNCHER } from '../config';
-const slimerJS = require('slimerjs');
-const PDF_SLIMER_SCRIPT = compatiblePath(path.join(__dirname, 'slimerPDF.js'));
+// import { SLIMERJSLAUNCHER } from '../config';
+const phantomJS = require('phantomjs');
+const PDF_SCRIPT = compatiblePath(path.join(__dirname, 'phantomPDF.js'));
 
 export async function generatePDF(url: string, filePath: string, renderOnCallback = false): Promise<Buffer> {
     try {
-        await execute(`export`, [`SLIMERJSLAUNCHER=${SLIMERJSLAUNCHER}`], true);
+        //await execute(`export`, [`SLIMERJSLAUNCHER=${SLIMERJSLAUNCHER}`], true);
         const output = await execute(
-            compatiblePath(slimerJS.path),
+            compatiblePath(phantomJS.path),
             [
-                '--headless',
-                '--disk-cache=true',
-                PDF_SLIMER_SCRIPT,
+                // '--headless',
+                // '--disk-cache=true',
+                PDF_SCRIPT,
                 renderOnCallback ? '--render-on-callback' : '',
                 `"${url}"`,
                 filePath,
             ],
             true,
         );
-        console.debug('SlimerJS', output);
+        console.debug('PhantomJS', output);
         return readFileSync(filePath);
 
         // TODO: Delete cache file

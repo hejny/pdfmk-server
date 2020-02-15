@@ -64,7 +64,7 @@ function render(page, destination) {
     console.log(destination);
     console.debug(consoleLogs);
     page.close();
-    slimer.exit();
+    phantom.exit();
 }
 
 function onErrorID(id) {

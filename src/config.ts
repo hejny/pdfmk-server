@@ -7,7 +7,7 @@ export const PORT = config
     .number()
     .default(3000).value!;
 
-export const SLIMERJSLAUNCHER = config.get('SLIMERJSLAUNCHER').required().value;
+// export const SLIMERJSLAUNCHER = config.get('SLIMERJSLAUNCHER').required().value;
 export const CACHE_DIR = config.get('CACHE_DIR').required().value;
 export const SELF_URL = config
     .get('SELF_URL')
