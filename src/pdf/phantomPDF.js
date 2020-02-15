@@ -2,6 +2,8 @@
 var page = require('webpage').create();
 var system = require('system');
 
+console.log('aaa');
+
 var usage = 'Usage: phantomjs ./phantom.js certificateURL.html destination.pdf';
 
 phantom.onError = onErrorID('phantom');

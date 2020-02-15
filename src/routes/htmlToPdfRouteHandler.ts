@@ -12,17 +12,19 @@ export const htmlToPdfRouteHandler: RequestHandler = async (request, response, n
             .url()
             .required().value;
         const download = query
-            .get('download', 'Will be file downloaded or just shown by a browser.')
-            .boolean()
-            .default(false).value!;
+            .get('download', 'Will be file downloaded and its name will be this param. If not set (the default option) just shown by a browser.')
+            .value;
         const nocache = query
             .get('nocache', 'Do not use cache and regenerate the pdf.')
             .boolean()
             .default(false).value!;
         const renderOnCallback = query
-            .get('renderOnCallback', 'Render after calling window.callPhantom() inside the site.')
-            .boolean()
-            .default(false).value!;
+            .get('renderOnCallback', 'Render after calling window[renderOnCallback].')
+.value;
+
+        if(renderOnCallback && renderOnCallback!=='callPhantom'){
+            throw new Error('Callback must be exactly "callPhantom". In future this will be repaired.');
+        }
 
         // TODO: Pass file name in query parameters
         const content = await getConvertedFile(url.toString(), nocache, renderOnCallback);

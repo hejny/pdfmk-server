@@ -6,13 +6,13 @@ import { cacheFileUpload } from './cacheFileUpload';
 import { cacheFileDownload } from './cacheFileDownload';
 import { generatePDF } from './generatePDF';
 
-export async function getConvertedFile(url: string, nocache = false, renderOnCallback = false): Promise<Buffer> {
+export async function getConvertedFile(url: string, nocache = false, renderOnCallback?: string): Promise<Buffer> {
     const pdfKey = parse(url).hostname + '/' + url.split('/').join('-');
     const hash = createHash('sha256')
         .update(url)
         .digest('hex');
 
-    const pdfCachePath = path.join(__dirname, '..', CACHE_DIR, `${hash}.pdf`);
+    const pdfCachePath = path.join(__dirname, '../..', CACHE_DIR, `${hash}.pdf`);
 
     let file = nocache ? null : await cacheFileDownload(pdfKey);
 
