@@ -16,8 +16,8 @@ export const testRouteHandler: RequestHandler = async (request, response, next) 
 
             <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test`)}&amp;nocache=YES" target="_blank">Print me & show!</a></li>
             <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test`)}&amp;nocache=YES&amp;download=page">Print me & download as page.pdf!</a></li>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test`)}&amp;nocache=YES&amp;renderOnCallback=callPhantom" target="_blank">Print me but but until countdown & show!</a></li>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test?words`)}&amp;nocache=YES&amp;renderOnCallback=callPhantom" target="_blank">Print me with multiple pages & show!</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test`)}&amp;nocache=YES&amp;renderOnCallback=renderMe" target="_blank">Print me but but until countdown & show!</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test?words`)}&amp;nocache=YES" target="_blank">Print me with multiple pages & show!</a></li>
 
             <p id="words"><p>
 
@@ -27,7 +27,7 @@ export const testRouteHandler: RequestHandler = async (request, response, next) 
                     document.getElementById("countdown").innerHTML = i;
                     if(i===0){
                         clearInterval(interval);
-                        window.callPhantom();
+                        window.renderMe();
                     }
                     i--;
                 },1000);
@@ -40,7 +40,6 @@ export const testRouteHandler: RequestHandler = async (request, response, next) 
                         words+='foo ';
                     }
                     document.getElementById("words").innerHTML = words;
-                    window.callPhantom();
                 }
             </script>
         
