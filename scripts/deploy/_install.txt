@@ -1,0 +1,7 @@
+TODO: This will go to indipendent package.json
+
+waitasecond isomorphic-fetch compare-versions node-ssh glob-promise promise-sftp
+
+
+
+

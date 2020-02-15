@@ -10,14 +10,15 @@ export async function deployedVersionCheck(remote) {
 
     try {
         const about = await fetchJsonRetry(remote.versionUrl);
-
+        //console.log(about);
         const deployedVersion = about.version || about.data.version;
 
         if (deployedVersion !== version) {
             throw new Error(`Versions are not matching deployed=${deployedVersion}, expected=${version}.`);
         }
+
+        console.info(`"${remote.name}" was successfully deployed and checked in version "${deployedVersion}".`);
     } catch (error) {
         throw new Error(`There is some problem with deploy, please check ${remote.versionUrl} . ${error.message}`);
     }
-    console.info(`"${remote.name}" was successfully deployed and checked in version "${deployedVersion}".`);
 }
