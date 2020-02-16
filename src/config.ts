@@ -21,4 +21,10 @@ export const AWS_ACCESS_KEY_ID = config.get('AWS_ACCESS_KEY_ID').value;
 export const AWS_SECRET_ACCESS_KEY = config.get('AWS_SECRET_ACCESS_KEY').value;
 export const AWS_REGION = config.get('AWS_REGION').value;
 
+export const ALLOWED_DOMAINS = config.get('ALLOWED_DOMAINS').list().value;
+export const PUPPETEER_LAUNCH_OPTIONS = config
+    .get('PUPPETEER_LAUNCH_OPTIONS')
+    .json()
+    .default({}).value;
+
 // TODO: Choise between local and AWS S3 cache

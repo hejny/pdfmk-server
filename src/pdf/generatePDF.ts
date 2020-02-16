@@ -1,9 +1,10 @@
 import { readFileSync } from 'fs';
 import puppeteer from 'puppeteer';
+import { PUPPETEER_LAUNCH_OPTIONS } from '../config';
 
 export async function generatePDF(url: string, filePath: string, renderOnCallback?: string): Promise<Buffer> {
     try {
-        const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+        const browser = await puppeteer.launch({ ...PUPPETEER_LAUNCH_OPTIONS });
         const page = await browser.newPage();
         await page.setBypassCSP(true);
 

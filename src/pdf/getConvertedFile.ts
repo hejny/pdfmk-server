@@ -1,13 +1,23 @@
 import { createHash } from 'crypto';
 import { parse } from 'url';
 import path from 'path';
-import { CACHE_DIR } from '../config';
+import { CACHE_DIR, ALLOWED_DOMAINS } from '../config';
 import { cacheFileUpload } from './cacheFileUpload';
 import { cacheFileDownload } from './cacheFileDownload';
 import { generatePDF } from './generatePDF';
 
 export async function getConvertedFile(url: string, nocache = false, renderOnCallback?: string): Promise<Buffer> {
-    const pdfKey = parse(url).hostname + '/' + url.split('/').join('-');
+    const parsedURL = parse(url);
+
+    if (!parsedURL.hostname || (ALLOWED_DOMAINS && !ALLOWED_DOMAINS.includes(parsedURL.hostname))) {
+        throw new Error(
+            `URL "${url}" (domain "${parsedURL.hostname}") is not in whitelisted domain list ${(
+                ALLOWED_DOMAINS || []
+            ).join(', ')}.`,
+        );
+    }
+
+    const pdfKey = parsedURL.hostname + '/' + url.split('/').join('-');
     const hash = createHash('sha256')
         .update(url)
         .digest('hex');
