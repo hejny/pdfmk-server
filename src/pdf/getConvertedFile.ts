@@ -9,7 +9,7 @@ import { LoadEvent } from 'puppeteer';
 
 export async function getConvertedFile(
     url: string,
-    nocache = false,
+    noCache = false,
     renderOnCallback?: string,
     waitUntil?: LoadEvent,
 ): Promise<Buffer> {
@@ -30,7 +30,7 @@ export async function getConvertedFile(
 
     const pdfCachePath = path.join(__dirname, '../..', CACHE_DIR, `${hash}.pdf`);
 
-    let file = nocache ? null : await cacheFileDownload(pdfKey);
+    let file = noCache ? null : await cacheFileDownload(pdfKey);
 
     if (!file) {
         file = await generatePDF(url, pdfCachePath, renderOnCallback, waitUntil);
@@ -41,9 +41,9 @@ export async function getConvertedFile(
     return file;
 
     /*
-    return (nocache ? Promise.reject() : cacheFileDownload(pdfKey))
+    return (noCache ? Promise.reject() : cacheFileDownload(pdfKey))
         .catch(() => generatePDF(url, pdfCachePath, renderOnCallback))
-        .then((file) => (nocache ? Promise.resolve(file) : cacheFileUpload(pdfKey, file, 'application/pdf')));
+        .then((file) => (noCache ? Promise.resolve(file) : cacheFileUpload(pdfKey, file, 'application/pdf')));
 
     */
 }

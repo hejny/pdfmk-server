@@ -16,8 +16,8 @@ export const htmlToPdfRouteHandler: RequestHandler = async (request, response, n
             'download',
             'Will be file downloaded and its name will be this param. If not set (the default option) just shown by a browser.',
         ).value;
-        const nocache = query
-            .get('nocache', 'Do not use cache and regenerate the pdf.')
+        const noCache = query
+            .get('noCache', 'Do not use cache and regenerate the pdf.')
             .boolean()
             .default(false).value!;
 
@@ -32,7 +32,7 @@ export const htmlToPdfRouteHandler: RequestHandler = async (request, response, n
         }*/
 
         // TODO: Pass file name in query parameters
-        const content = await getConvertedFile(url.toString(), nocache, renderOnCallback, waitUntil);
+        const content = await getConvertedFile(url.toString(), noCache, renderOnCallback, waitUntil);
 
         return response
             .contentType('application/pdf')

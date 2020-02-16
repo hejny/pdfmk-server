@@ -27,34 +27,34 @@ export const testRouteHandler: RequestHandler = async (request, response, next) 
 
             <h2>Basics</h2>
             <ul>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test`)}&amp;nocache=YES" target="_blank">Print me & show!</a></li>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test`)}&amp;nocache=YES&amp;download=page">Print me & download as page.pdf!</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test`)}&amp;noCache=YES" target="_blank">Print me & show!</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test`)}&amp;noCache=YES&amp;download=page">Print me & download as page.pdf!</a></li>
             </ul>
 
             <h2>Error handling</h2>
             <ul>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test/httpStatusCode/200`)}&amp;nocache=YES" target="_blank">OK (200) </a></li>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test/httpStatusCode/400`)}&amp;nocache=YES" target="_blank">Bad Request (400) </a></li>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test/httpStatusCode/401`)}&amp;nocache=YES" target="_blank">Unauthorized (401) </a></li>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test/httpStatusCode/403`)}&amp;nocache=YES" target="_blank">Forbidden (403) </a></li>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test/httpStatusCode/404`)}&amp;nocache=YES" target="_blank">Not Found (404) </a></li>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test/httpStatusCode/500`)}&amp;nocache=YES" target="_blank">Internal Server Error (500)</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test/httpStatusCode/200`)}&amp;noCache=YES" target="_blank">OK (200) </a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test/httpStatusCode/400`)}&amp;noCache=YES" target="_blank">Bad Request (400) </a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test/httpStatusCode/401`)}&amp;noCache=YES" target="_blank">Unauthorized (401) </a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test/httpStatusCode/403`)}&amp;noCache=YES" target="_blank">Forbidden (403) </a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test/httpStatusCode/404`)}&amp;noCache=YES" target="_blank">Not Found (404) </a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test/httpStatusCode/500`)}&amp;noCache=YES" target="_blank">Internal Server Error (500)</a></li>
             </ul>
             
             <h2>Waiting</h2>
             <ul>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test`)}&amp;nocache=YES&amp;renderOnCallback=renderMe" target="_blank">Print me but wait until countdown.</a></li>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`https://en.wikipedia.org/wiki/Special:Random`)}&amp;nocache=YES&amp;waitUntil=load" target="_blank">Random Wikipedia article, waitUntil=load.</a></li>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`https://en.wikipedia.org/wiki/Special:Random`)}&amp;nocache=YES&amp;waitUntil=domcontentloaded" target="_blank">Random Wikipedia article, waitUntil=domcontentloaded.</a></li>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`https://en.wikipedia.org/wiki/Special:Random`)}&amp;nocache=YES&amp;waitUntil=networkidle0" target="_blank">Random Wikipedia article, waitUntil=networkidle0.</a></li>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`https://en.wikipedia.org/wiki/Special:Random`)}&amp;nocache=YES&amp;waitUntil=networkidle2" target="_blank">Random Wikipedia article, waitUntil=networkidle2.</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test`)}&amp;noCache=YES&amp;renderOnCallback=renderMe" target="_blank">Print me but wait until countdown.</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`https://en.wikipedia.org/wiki/Special:Random`)}&amp;c=YES&amp;waitUntil=load" target="_blank">Random Wikipedia article, waitUntil=load.</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`https://en.wikipedia.org/wiki/Special:Random`)}&amp;noCache=YES&amp;waitUntil=domcontentloaded" target="_blank">Random Wikipedia article, waitUntil=domcontentloaded.</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`https://en.wikipedia.org/wiki/Special:Random`)}&amp;noCache=YES&amp;waitUntil=networkidle0" target="_blank">Random Wikipedia article, waitUntil=networkidle0.</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`https://en.wikipedia.org/wiki/Special:Random`)}&amp;noCache=YES&amp;waitUntil=networkidle2" target="_blank">Random Wikipedia article, waitUntil=networkidle2.</a></li>
             </ul>
             <p>See <a href="https://pptr.dev/#?product=Puppeteer&show=api-pagegotourl-options">Puppeteer manual</a> for waitUntil options.</p>
             <p>TODO: In future there will be option of waiting some time</p>
             
             <h2>Advanced content</h2>
             <ul>
-            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test?words`)}&amp;nocache=YES" target="_blank">Print me with multiple pages of text.</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test?words`)}&amp;noCache=YES" target="_blank">Print me with multiple pages of text.</a></li>
             </ul>
 
             <p id="words"><p>
