@@ -3,20 +3,16 @@ import puppeteer from 'puppeteer';
 
 export async function generatePDF(url: string, filePath: string, renderOnCallback?: string): Promise<Buffer> {
     try {
-
-
-        const browser = await puppeteer.launch(/*{executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"}*/);
+        const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
         const page = await browser.newPage();
         await page.setBypassCSP(true);
 
-
         //{waitUntil: ['networkidle2'/*,'domcontentloaded'*/]}
         await page.goto(url, {
-            waitUntil: 'load',
-            timeout: 10000 // TODO: Configurable
+            waitUntil: 'domcontentloaded', // @see https://pptr.dev/#?product=Puppeteer&version=v2.1.1&show=api-pagegotourl-options
+            timeout: 10000, // TODO: Configurable
         });
-        if(renderOnCallback){
-
+        if (renderOnCallback) {
             // TODO: This is a bit hack can it be done somehow better?
             await page.evaluate(`window.${renderOnCallback} = ()=>{
                 
@@ -30,21 +26,18 @@ export async function generatePDF(url: string, filePath: string, renderOnCallbac
             `);
             await page.waitForSelector('.renderNow');
         }
-        await page.pdf({path: filePath, format: 'A4'});
+        await page.pdf({ path: filePath, format: 'A4', printBackground: true });
         await browser.close();
-
 
         return readFileSync(filePath);
 
         // TODO: Delete cache files
-
     } catch (error) {
         console.error(error);
-        if(error.message.includes('waiting for selector ".renderNow" failed')){
+        if (error.message.includes('waiting for selector ".renderNow" failed')) {
             throw new Error(`Probbably not called window.${renderOnCallback} inside the rendered page "${url}".`);
-        }else{
+        } else {
             throw error;
         }
-
     }
 }
