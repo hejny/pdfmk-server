@@ -44,8 +44,13 @@ export const testRouteHandler: RequestHandler = async (request, response, next) 
             <h2>Waiting</h2>
             <ul>
             <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test`)}&amp;nocache=YES&amp;renderOnCallback=renderMe" target="_blank">Print me but wait until countdown.</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`https://en.wikipedia.org/wiki/Special:Random`)}&amp;nocache=YES&amp;waitUntil=load" target="_blank">Random Wikipedia article, waitUntil=load.</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`https://en.wikipedia.org/wiki/Special:Random`)}&amp;nocache=YES&amp;waitUntil=domcontentloaded" target="_blank">Random Wikipedia article, waitUntil=domcontentloaded.</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`https://en.wikipedia.org/wiki/Special:Random`)}&amp;nocache=YES&amp;waitUntil=networkidle0" target="_blank">Random Wikipedia article, waitUntil=networkidle0.</a></li>
+            <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`https://en.wikipedia.org/wiki/Special:Random`)}&amp;nocache=YES&amp;waitUntil=networkidle2" target="_blank">Random Wikipedia article, waitUntil=networkidle2.</a></li>
             </ul>
-            <p>TODO: In future there will be more options of waiting then renderOnCallback</p>
+            <p>See <a href="https://pptr.dev/#?product=Puppeteer&show=api-pagegotourl-options">Puppeteer manual</a> for waitUntil options.</p>
+            <p>TODO: In future there will be option of waiting some time</p>
             
             <h2>Advanced content</h2>
             <ul>

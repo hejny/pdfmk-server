@@ -5,11 +5,17 @@ import { CACHE_DIR, ALLOWED_DOMAINS } from '../config';
 import { cacheFileUpload } from './cacheFileUpload';
 import { cacheFileDownload } from './cacheFileDownload';
 import { generatePDF } from './generatePDF';
+import { LoadEvent } from 'puppeteer';
 
-export async function getConvertedFile(url: string, nocache = false, renderOnCallback?: string): Promise<Buffer> {
+export async function getConvertedFile(
+    url: string,
+    nocache = false,
+    renderOnCallback?: string,
+    waitUntil?: LoadEvent,
+): Promise<Buffer> {
     const parsedURL = parse(url);
 
-    if (!parsedURL.hostname || (ALLOWED_DOMAINS && !ALLOWED_DOMAINS.includes(parsedURL.hostname))) {
+    if (!parsedURL.hostname || !ALLOWED_DOMAINS.includes(parsedURL.hostname)) {
         throw new Error(
             `URL "${url}" (domain "${parsedURL.hostname}") is not in whitelisted domain list ${(
                 ALLOWED_DOMAINS || []
@@ -27,7 +33,7 @@ export async function getConvertedFile(url: string, nocache = false, renderOnCal
     let file = nocache ? null : await cacheFileDownload(pdfKey);
 
     if (!file) {
-        file = await generatePDF(url, pdfCachePath, renderOnCallback);
+        file = await generatePDF(url, pdfCachePath, renderOnCallback, waitUntil);
         // Dont wait till file is fully cached
         cacheFileUpload(pdfKey, file, 'application/pdf');
     }
