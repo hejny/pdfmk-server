@@ -4,7 +4,8 @@ import cors from 'cors';
 import http from 'http';
 import { json } from 'body-parser';
 import { testRouteHandler } from './routes/testRouteHandler';
-const packageJson = require('../package.json');
+import { testHttpStatusCodeRouteHandler } from './routes/testHttpStatusCodeRouteHandler';
+import { version } from './config';
 
 export function createApp(): { app: express.Application; server: http.Server } {
     const app = express();
@@ -18,19 +19,16 @@ export function createApp(): { app: express.Application; server: http.Server } {
         console.error(err);
     });
 
-    app.get(['/', '/about'], async (request, response) => {
+    app.get('/about', async (request, response) => {
         response.send({
-            version: packageJson.version,
+            version,
         });
     });
 
     app.get('/html/pdf', htmlToPdfRouteHandler);
 
-    app.get('/test', testRouteHandler);
-
-    /*app.get('/kill', () => {
-        process.exit();
-    });*/
+    app.get(['/', '/test'], testRouteHandler);
+    app.get('/test/httpStatusCode/:statusCode', testHttpStatusCodeRouteHandler);
 
     return {
         app,

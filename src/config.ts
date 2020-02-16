@@ -1,4 +1,6 @@
 import { ConfigChecker } from 'configchecker';
+const packageJson = require('../package.json');
+export const version = packageJson.version;
 
 const config = ConfigChecker.from(process.env);
 
