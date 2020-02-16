@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import { SELF_URL } from '../config';
-import { version } from 'punycode';
+import { version } from '../config';
 
 // prettier-ignore
 export const testRouteHandler: RequestHandler = async (request, response, next) => {
