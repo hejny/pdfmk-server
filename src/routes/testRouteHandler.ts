@@ -58,7 +58,7 @@ export const testRouteHandler: RequestHandler = async (request, response, next) 
         <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test?words`)}&amp;noCache=YES" target="_blank">Print me with multiple pages of text.</a></li>
         </ul>
 
-        <h2>PDF pdfOptions</h2>
+        <h2>PDF options</h2>
         <ul>
         ${([
             {
