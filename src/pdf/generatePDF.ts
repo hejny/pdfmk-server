@@ -36,7 +36,7 @@ export async function generatePDF(
         }
 
         const pdfOptionsComposed = { path: filePath, ...PUPPETEER_PDF_OPTIONS, ...pdfOptions };
-        console.log('pdfOptionsComposed', pdfOptionsComposed);
+        // console.log('pdfOptionsComposed', pdfOptionsComposed);
         await page.pdf(pdfOptionsComposed);
         await browser.close();
 

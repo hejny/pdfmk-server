@@ -71,11 +71,11 @@ export const testRouteHandler: RequestHandler = async (request, response, next) 
             },
             {
                 name: 'Format 9cm x 5cm (VCard)',
-                pdfOptions: {width: '9cm',height:'5cm' }
+                pdfOptions: {format: null, width: '9cm',height:'5cm' }
             },
             {
                 name: 'Format A4, margin 1cm',
-                pdfOptions: {margin: { left: '1cm', top: '1cm', right: '1cm', bottom: '1cm' } }
+                pdfOptions: {format: null, margin: { left: '1cm', top: '1cm', right: '1cm', bottom: '1cm' } }
             },
             {
                 name: 'Format A4, no margin',
@@ -83,7 +83,7 @@ export const testRouteHandler: RequestHandler = async (request, response, next) 
             },
             {
                 name: 'Format 10cm x 10cm, margin 2cm',
-                pdfOptions: {width: '10cm',height:'10cm', margin: { left: '2cm', top: '2cm', right: '2cm', bottom: '2cm' } }
+                pdfOptions: {format: null, width: '10cm',height:'10cm', margin: { left: '2cm', top: '2cm', right: '2cm', bottom: '2cm' } }
             },
         ] as {name: string, pdfOptions:Partial<PDFOptions>}[]).map((config)=>`
             <li><a href="${SELF_URL}/html/pdf?url=${encodeURIComponent(`${SELF_URL}/test?words`)}&amp;noCache=YES&amp;pdfOptions=${encodeURIComponent(JSON.stringify(config.pdfOptions))}" target="_blank">${config.name}</a></li>
