@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import { getConvertedFile } from '../pdf/getConvertedFile';
 import { ConfigChecker } from 'configchecker';
-import { LoadEvent } from 'puppeteer';
+import { LoadEvent, PDFOptions } from 'puppeteer';
 
 export const htmlToPdfRouteHandler: RequestHandler = async (request, response, next) => {
     const query = ConfigChecker.from(request.query);
@@ -12,6 +12,13 @@ export const htmlToPdfRouteHandler: RequestHandler = async (request, response, n
             .get('url', 'Url which will be converted to pdf.')
             .url()
             .required().value;
+
+        const pdfOptions = query
+            .get('pdfOptions', 'PDF print options (see https://pptr.dev/#?product=Puppeteer&show=api-pagepdfoptions).')
+            .json()
+            .asType<Partial<PDFOptions>>()
+            .default({}).value!;
+
         const download = query.get(
             'download',
             'Will be file downloaded and its name will be this param. If not set (the default option) just shown by a browser.',
@@ -32,7 +39,7 @@ export const htmlToPdfRouteHandler: RequestHandler = async (request, response, n
         }*/
 
         // TODO: Pass file name in query parameters
-        const content = await getConvertedFile(url.toString(), noCache, renderOnCallback, waitUntil);
+        const content = await getConvertedFile(url.toString(), pdfOptions, noCache, renderOnCallback, waitUntil);
 
         return response
             .contentType('application/pdf')

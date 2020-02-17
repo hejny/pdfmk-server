@@ -1,9 +1,10 @@
 import { readFileSync } from 'fs';
-import puppeteer, { LoadEvent } from 'puppeteer';
-import { PUPPETEER_LAUNCH_OPTIONS } from '../config';
+import puppeteer, { LoadEvent, PDFOptions } from 'puppeteer';
+import { PUPPETEER_LAUNCH_OPTIONS, PUPPETEER_PDF_OPTIONS } from '../config';
 
 export async function generatePDF(
     url: string,
+    pdfOptions: Partial<PDFOptions>,
     filePath: string,
     renderOnCallback?: string,
     waitUntil: LoadEvent = 'domcontentloaded',
@@ -33,7 +34,10 @@ export async function generatePDF(
             `);
             await page.waitForSelector('.renderNow');
         }
-        await page.pdf({ path: filePath, format: 'A4', printBackground: true });
+
+        const pdfOptionsComposed = { path: filePath, ...PUPPETEER_PDF_OPTIONS, ...pdfOptions };
+        console.log('pdfOptionsComposed', pdfOptionsComposed);
+        await page.pdf(pdfOptionsComposed);
         await browser.close();
 
         return readFileSync(filePath);

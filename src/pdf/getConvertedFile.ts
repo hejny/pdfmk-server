@@ -5,10 +5,11 @@ import { CACHE_DIR, ALLOWED_DOMAINS } from '../config';
 import { cacheFileUpload } from './cacheFileUpload';
 import { cacheFileDownload } from './cacheFileDownload';
 import { generatePDF } from './generatePDF';
-import { LoadEvent } from 'puppeteer';
+import { LoadEvent, PDFOptions } from 'puppeteer';
 
 export async function getConvertedFile(
     url: string,
+    pdfOptions: Partial<PDFOptions>,
     noCache = false,
     renderOnCallback?: string,
     waitUntil?: LoadEvent,
@@ -24,6 +25,7 @@ export async function getConvertedFile(
     }
 
     const pdfKey = parsedURL.hostname + '/' + url.split('/').join('-');
+    // TODO: Other things as pdfOptions, renderOnCallback and waitUntil to cache hash
     const hash = createHash('sha256')
         .update(url)
         .digest('hex');
@@ -33,7 +35,7 @@ export async function getConvertedFile(
     let file = noCache ? null : await cacheFileDownload(pdfKey);
 
     if (!file) {
-        file = await generatePDF(url, pdfCachePath, renderOnCallback, waitUntil);
+        file = await generatePDF(url, pdfOptions, pdfCachePath, renderOnCallback, waitUntil);
         // Dont wait till file is fully cached
         cacheFileUpload(pdfKey, file, 'application/pdf');
     }

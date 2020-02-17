@@ -1,4 +1,5 @@
 import { ConfigChecker } from 'configchecker';
+import { PDFOptions } from 'puppeteer';
 const packageJson = require('../package.json');
 export const version = packageJson.version;
 
@@ -16,6 +17,8 @@ export const SELF_URL = config
     .required()
     .value.toString()
     .replace(/\/+$/g, '');
+
+// TODO: Choise between local and AWS S3 cache
 export const AWS_S3_BUCKET_NAME = config.get('AWS_S3_BUCKET_NAME').default('untitled').value!;
 export const AWS_ACCESS_KEY_ID = config.get('AWS_ACCESS_KEY_ID').value;
 export const AWS_SECRET_ACCESS_KEY = config.get('AWS_SECRET_ACCESS_KEY').value;
@@ -32,4 +35,9 @@ export const PUPPETEER_LAUNCH_OPTIONS = config
     .json()
     .default({}).value;
 
-// TODO: Choise between local and AWS S3 cache
+export const PUPPETEER_PDF_OPTIONS = config
+    .get('PUPPETEER_PDF_OPTIONS')
+    .json()
+    .asType<Partial<PDFOptions>>()
+    .default({ format: 'A4', printBackground: true, margin: { left: '1cm', top: '1cm', right: '1cm', bottom: '1cm' } })
+    .value;
