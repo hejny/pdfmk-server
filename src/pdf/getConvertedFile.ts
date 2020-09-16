@@ -26,6 +26,9 @@ export async function getConvertedFile(
 
     const pdfKey = parsedURL.hostname + '/' + url.split('/').join('-');
     // TODO: Other things as pdfOptions, renderOnCallback and waitUntil to cache hash
+    // TODO: Use library sjcl
+    // TODO: Hash cache: Encapsule to some function / library
+    // TODO: Hash cache: Directory structure more deep
     const hash = createHash('sha256')
         .update(url)
         .digest('hex');
