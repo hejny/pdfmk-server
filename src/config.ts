@@ -3,9 +3,19 @@ import { PDFOptions } from 'puppeteer';
 const packageJson = require('../package.json');
 export const version = packageJson.version;
 
+if (process.env.NODE_ENV === 'development') {
+    // Note: This is just for development:
+    require('dotenv').config();
+}
+
 const config = ConfigChecker.from(process.env);
 
-export const SELF_URL = 'http://localhost:8080';
+export const SELF_URL = config
+    .get('SELF_URL')
+    .url()
+    .required()
+    .value.toString()
+    .replace(/\/+$/g, '');
 
 /*
 Note: Google cloud functions does not neet port
@@ -17,12 +27,7 @@ export const PORT = config
 
 /*
 export const CACHE_DIR = config.get('CACHE_DIR').required().value;
-export const SELF_URL = config
-    .get('SELF_URL')
-    .url()
-    .required()
-    .value.toString()
-    .replace(/\/+$/g, '');
+
 
 // TODO: Choise between local and AWS S3 cache
 export const AWS_S3_BUCKET_NAME = config.get('AWS_S3_BUCKET_NAME').default('untitled').value!;
