@@ -1,0 +1,6 @@
+name = "pdf-maker"
+type = "javascript"
+account_id = "b4b75798821837f99c1095f9a446ec8f"
+workers_dev = true
+route = ""
+zone_id = ""
