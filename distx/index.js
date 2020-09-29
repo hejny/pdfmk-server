@@ -7,6 +7,8 @@ let browserPromise = puppeteer.launch ({
     ]
 });
 
+// TODO: !!! Use and delete
+
 exports.screenshot = async (req, res) => {
 
     const url = req.query.url || 'http://example.com';

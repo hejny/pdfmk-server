@@ -1,9 +1,9 @@
 import { createHash } from 'crypto';
 import { parse } from 'url';
 import path from 'path';
-import { CACHE_DIR, ALLOWED_DOMAINS } from '../config';
-import { cacheFileUpload } from './cacheFileUpload';
-import { cacheFileDownload } from './cacheFileDownload';
+// TODO: !!! import { CACHE_DIR, ALLOWED_DOMAINS } from '../config';
+//import { cacheFileUpload } from './cacheFileUpload';
+//import { cacheFileDownload } from './cacheFileDownload';
 import { generatePDF } from './generatePDF';
 import { LoadEvent, PDFOptions } from 'puppeteer';
 
@@ -16,6 +16,7 @@ export async function getConvertedFile(
 ): Promise<Buffer> {
     const parsedURL = parse(url);
 
+    /* TODO: !!!
     if (!parsedURL.hostname || !ALLOWED_DOMAINS.includes(parsedURL.hostname)) {
         throw new Error(
             `URL "${url}" (domain "${parsedURL.hostname}") is not in whitelisted domain list ${(
@@ -23,6 +24,7 @@ export async function getConvertedFile(
             ).join(', ')}.`,
         );
     }
+    */
 
     const pdfKey = parsedURL.hostname + '/' + url.split('/').join('-');
     // TODO: Other things as pdfOptions, renderOnCallback and waitUntil to cache hash
@@ -33,17 +35,21 @@ export async function getConvertedFile(
         .update(url)
         .digest('hex');
 
-    const pdfCachePath = path.join(__dirname, '../..', CACHE_DIR, `${hash}.pdf`);
+    //const pdfCachePath = path.join(__dirname, '../..', CACHE_DIR, `${hash}.pdf`);
 
-    let file = noCache ? null : await cacheFileDownload(pdfKey);
+    //let file = noCache ? null : await cacheFileDownload(pdfKey);
 
+    /*
     if (!file) {
         file = await generatePDF(url, pdfOptions, pdfCachePath, renderOnCallback, waitUntil);
         // Dont wait till file is fully cached
         cacheFileUpload(pdfKey, file, 'application/pdf');
     }
-
+    
     return file;
+    */ 
+
+   return generatePDF(url, pdfOptions, renderOnCallback, waitUntil);
 
     /*
     return (noCache ? Promise.reject() : cacheFileDownload(pdfKey))

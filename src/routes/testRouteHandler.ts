@@ -92,6 +92,61 @@ export const testRouteHandler: RequestHandler = async (request, response, next) 
         </ul>
 
 
+        <h2>Interactive</h2>
+
+        <form action="../new" method="post" target="_blank">
+
+
+            <p><label>
+                <b>Board name:</b>
+                <input type="text" name="name" placeholder="My awesome board" />
+            </label></p>
+
+            <p><label>
+            <b>importAsMaterialize:</b><br/>
+            <i>Place here url of another existing board</i><br/>
+            <input type="text" name="importAsMaterialize" />
+            </label></p>
+
+            <p><label>
+            <b>importAsLink:</b><br/>
+            <i>Place here url of another existing board</i><br/>
+            <i>NOTE: TODO: This is not working yet.</i><br/>
+            <input type="text" name="importAsLink" />
+            </label></p>
+
+            <p>
+            <b>pluginsOn:</b><br/>
+            <i>Place here name of plugins listed bellow or keep it empty</i><br/>
+            <input type="text" name="pluginsOn[]" /><br/>
+            <input type="text" name="pluginsOn[]" /><br/>
+            <input type="text" name="pluginsOn[]" /><br/>
+            <input type="text" name="pluginsOn[]" />
+            </p>
+
+            <p>
+            <b>pluginsOff:</b><br/>
+            <i>Place here name of plugins listed bellow or keep it empty</i><br/>
+            <input type="text" name="pluginsOff[]" /><br/>
+            <input type="text" name="pluginsOff[]" /><br/>
+            <input type="text" name="pluginsOff[]" /><br/>
+            <input type="text" name="pluginsOff[]" />
+            </p>
+
+            <p><label>
+                <input type="radio" name="redirect" value="false"/>
+                Show the JSON info about newly created board
+            </label></p>
+            <p><label>
+                <input type="radio" name="redirect" value="true"/>
+                Redirect me to the board
+            </label></p>
+
+
+            <input type="submit" value="Generate">
+        </form>
+
+
         <p id="words"><p>
 
         <script>

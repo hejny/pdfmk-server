@@ -5,11 +5,18 @@ export const version = packageJson.version;
 
 const config = ConfigChecker.from(process.env);
 
+
+export const SELF_URL = 'http://localhost:8080';
+
+/*
+Note: Google cloud functions does not neet port
 export const PORT = config
     .get('PORT')
     .number()
     .default(3000).value!;
+*/
 
+/*
 export const CACHE_DIR = config.get('CACHE_DIR').required().value;
 export const SELF_URL = config
     .get('SELF_URL')
@@ -41,3 +48,4 @@ export const PUPPETEER_PDF_OPTIONS = config
     .asType<Partial<PDFOptions>>()
     .default({ format: 'A4', printBackground: true, margin: { left: '1cm', top: '1cm', right: '1cm', bottom: '1cm' } })
     .value;
+*/

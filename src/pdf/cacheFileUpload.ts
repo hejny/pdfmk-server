@@ -1,3 +1,4 @@
+/*
 import { s3 } from '../storage';
 import { AWS_S3_BUCKET_NAME } from '../config';
 
@@ -12,3 +13,4 @@ export async function cacheFileUpload(key: string, file: Buffer, contentType?: s
         .promise();
     return file;
 }
+*/

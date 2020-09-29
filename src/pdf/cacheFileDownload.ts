@@ -1,7 +1,10 @@
-import { s3 } from '../storage';
-import { AWS_S3_BUCKET_NAME } from '../config';
+//import { s3 } from '../storage';
+//import { AWS_S3_BUCKET_NAME } from '../config';
 
 export async function cacheFileDownload(key: string): Promise<Buffer | null> {
+    
+    return null;
+    /*
     try {
         const { Body } = await s3
             .getObject({
@@ -14,4 +17,5 @@ export async function cacheFileDownload(key: string): Promise<Buffer | null> {
     } catch (error) {
         return null;
     }
+    */
 }

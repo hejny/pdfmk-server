@@ -1,7 +1,13 @@
 import { createApp } from "./app";
-import { PORT } from "./config";
 
 const { app } = createApp();
+
+exports.pdfmaker = app;
+
+/*
+Note: Google cloud functions runs this automatically
+
+import { PORT } from "./config";
 
 app.listen(PORT, () => {
     console.info('██████████████████████████████████████████');

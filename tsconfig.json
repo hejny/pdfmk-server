@@ -3,7 +3,7 @@
         "target": "es6",
         "module": "commonjs",
         "lib": ["es2017"],
-        "rootDir": "./",
+        "rootDir": "./src",
         "downlevelIteration": true,
         "baseUrl": ".",
         "outDir": "dist",
@@ -20,5 +20,6 @@
         "noUnusedLocals": false,
         "esModuleInterop": true
     },
+    "include": ["./src"],
     "exclude": ["./node_modules","./dist"],
 }
