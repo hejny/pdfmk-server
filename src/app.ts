@@ -1,11 +1,11 @@
-import { htmlToPdfRouteHandler } from './routes/htmlToPdfRouteHandler';
-import express from 'express';
-import cors from 'cors';
-import http from 'http';
 import { json } from 'body-parser';
-import { testRouteHandler } from './routes/testRouteHandler';
-import { testHttpStatusCodeRouteHandler } from './routes/testHttpStatusCodeRouteHandler';
+import cors from 'cors';
+import express from 'express';
+import http from 'http';
 import { version } from './config';
+import { htmlToPdfRouteHandler } from './routes/htmlToPdfRouteHandler';
+import { testHttpStatusCodeRouteHandler } from './routes/testHttpStatusCodeRouteHandler';
+import { testRouteHandler } from './routes/testRouteHandler';
 
 export function createApp(): { app: express.Application; server: http.Server } {
     const app = express();

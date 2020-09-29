@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs';
 import puppeteer, { LoadEvent, PDFOptions } from 'puppeteer';
 //import { PUPPETEER_LAUNCH_OPTIONS, PUPPETEER_PDF_OPTIONS } from '../config';
 

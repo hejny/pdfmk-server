@@ -1,5 +1,4 @@
 import { ConfigChecker } from 'configchecker';
-import { PDFOptions } from 'puppeteer';
 const packageJson = require('../package.json');
 export const version = packageJson.version;
 

@@ -1,5 +1,4 @@
 import { RequestHandler } from 'express';
-import { SELF_URL } from '../config';
 
 // prettier-ignore
 export const testHttpStatusCodeRouteHandler: RequestHandler = async (request, response, next) => {

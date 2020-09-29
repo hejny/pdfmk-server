@@ -1,11 +1,10 @@
 import { createHash } from 'crypto';
+import { LoadEvent, PDFOptions } from 'puppeteer';
 import { parse } from 'url';
-import path from 'path';
 // TODO: !!! import { CACHE_DIR, ALLOWED_DOMAINS } from '../config';
 //import { cacheFileUpload } from './cacheFileUpload';
 //import { cacheFileDownload } from './cacheFileDownload';
 import { generatePDF } from './generatePDF';
-import { LoadEvent, PDFOptions } from 'puppeteer';
 
 export async function getConvertedFile(
     url: string,
