@@ -2,9 +2,13 @@ import { RequestHandler } from 'express';
 import { getConvertedFile } from '../pdf/getConvertedFile';
 import { ConfigChecker } from 'configchecker';
 import { LoadEvent, PDFOptions } from 'puppeteer';
+import {parse as parseUrl} from 'url';
+import {parse as parseQuerystring} from 'querystring';
+
 
 export const htmlToPdfRouteHandler: RequestHandler = async (request, response, next) => {
-    const query = ConfigChecker.from(request.query);
+    
+    const query = ConfigChecker.from(/* TODO: ConfigChecker.fromQuery */parseQuerystring(parseUrl(request.url).query||'') as Record<string,string>);
     const errorMessage = query.get('errorMessage').value;
 
     try {
