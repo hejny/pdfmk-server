@@ -11,7 +11,7 @@
         "prettier-watch": "onchange \"**/*.{js,ts,tsx,json,css}\" -- prettier --config .prettierrc --write \"{{changed}}\"",
         "TODO: test": "jest --runInBand --detectOpenHandles --forceExit --setupFiles dotenv/config",
         "build": "tsc",
-        "deploy": "gcloud functions deploy pdfmaker --trigger-http --runtime nodejs10 --region=europe-west3 --memory=1024mb",
+        "deploy": "gcloud functions deploy pdfmaker --trigger-http --runtime nodejs12 --region=europe-west3 --memory=1024mb",
         "logs": "gcloud functions logs read pdfmaker",
         "preversion": "npm test",
         "postversion": "git push && git push --tags && npm run deploy"
