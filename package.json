@@ -1,12 +1,17 @@
 {
     "name": "pdf-maker",
     "version": "1.3.2",
-    "homepage": "https://github.com/hejny/pdf-maker/",
     "private": false,
     "main": "./dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hejny/pdf-maker"
+    },
+    "author": "Pavol Hejný <me@pavolhejny.com> (https://www.pavolhejny.com/)",
+    "license": "ISC",
     "scripts": {
         "start": "npm run develop",
-        "develop": "functions-framework --target=pdfmaker",
+        "develop": "run-s functions-framework --target=pdfmaker",
         "prettier": "prettier --config .prettierrc --write \"{src,public}/**/*.{ts,tsx,js,css}\" webpack.config.js",
         "prettier-watch": "onchange \"**/*.{js,ts,tsx,json,css}\" -- prettier --config .prettierrc --write \"{{changed}}\"",
         "TODO: test": "jest --runInBand --detectOpenHandles --forceExit --setupFiles dotenv/config",
@@ -41,10 +46,8 @@
         "@types/puppeteer": "^2.0.0",
         "@types/supertest": "^2.0.8",
         "@types/uuid": "^3.4.7",
-        "gh-pages": "^1.1.0",
         "onchange": "^5.2.0",
         "prettier": "^1.19.1",
-        "compare-versions": "^3.6.0",
         "supertest": "^4.0.2",
         "ts-node": "^7.0.1",
         "typescript": "^3.7.5"
