@@ -11,10 +11,10 @@ export async function generatePDF(
 ): Promise<Buffer> {
     try {
         const browser = await puppeteer.launch({
-                args: ['-no-sandbox'],
-            });
+            args: ['-no-sandbox'],
+        });
 
-            /* TODO: !!!({ ...PUPPETEER_LAUNCH_OPTIONS })*/
+        /* TODO: !!!({ ...PUPPETEER_LAUNCH_OPTIONS })*/
         const page = await browser.newPage();
         await page.setBypassCSP(true);
 
