@@ -5,7 +5,6 @@ export const version = packageJson.version;
 
 const config = ConfigChecker.from(process.env);
 
-
 export const SELF_URL = 'http://localhost:8080';
 
 /*

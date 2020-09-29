@@ -2,7 +2,6 @@
 //import { AWS_S3_BUCKET_NAME } from '../config';
 
 export async function cacheFileDownload(key: string): Promise<Buffer | null> {
-    
     return null;
     /*
     try {

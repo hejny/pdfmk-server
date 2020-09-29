@@ -11,12 +11,10 @@ export async function generatePDF(
 ): Promise<Buffer> {
     try {
         const browser = await puppeteer.launch({
-            args: [
-            '-no-sandbox'
-            ]
-        })
-        
-        /* TODO: !!!({ ...PUPPETEER_LAUNCH_OPTIONS })*/;
+                args: ['-no-sandbox'],
+            });
+
+            /* TODO: !!!({ ...PUPPETEER_LAUNCH_OPTIONS })*/
         const page = await browser.newPage();
         await page.setBypassCSP(true);
 
@@ -41,9 +39,8 @@ export async function generatePDF(
             await page.waitForSelector('.renderNow');
         }
 
-        const pdfOptionsComposed = { /*path: filePath*/ /* TODO: !!! ...PUPPETEER_PDF_OPTIONS, */...pdfOptions };
+        const pdfOptionsComposed = { /*path: filePath*/ /* TODO: !!! ...PUPPETEER_PDF_OPTIONS, */ ...pdfOptions };
         // console.log('pdfOptionsComposed', pdfOptionsComposed);
-
 
         return await page.pdf(pdfOptionsComposed);
         // TODO: !!! await browser.close();

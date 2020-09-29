@@ -1,4 +1,4 @@
-import { createApp } from "./app";
+import { createApp } from './app';
 
 const { app } = createApp();
 
@@ -21,4 +21,3 @@ process.on('unhandledRejection', (err) => {
     console.error(err);
 });
 */
-
