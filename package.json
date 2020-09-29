@@ -12,9 +12,9 @@
         "TODO: test-once": "ts-node -r dotenv/config src/testOnce.ts",
         "OLD-deploy": "ts-node -r dotenv/config ./scripts/deploy.js",
         "build": "tsc",
-        "deploy": "gcloud functions deploy pdf-maker-x --trigger-http --runtime nodejs10 --region=europe-west3 --memory=1024mb",
+        "deploy": "gcloud functions deploy screenshot --trigger-http --runtime nodejs10 --region=europe-west3 --memory=1024mb",
         "UNUSED-PARAMS-deploy": "--project $npm_package_config_gcp_project",
-        "logs": "gcloud functions logs read pdf-maker",
+        "logs": "gcloud functions logs read screenshot",
         "preversion": "npm test",
         "postversion": "git push && git push --tags && npm run deploy"
     },
