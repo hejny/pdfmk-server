@@ -14,14 +14,17 @@
         "develop": "npm-run-all --serial build --parallel _develop-server _develop-build",
         "_develop-server": "cross-env NODE_ENV=development functions-framework -r dotenv/config --target=pdfmaker",
         "_develop-build": "tsc --watch",
-        "prettier": "prettier --config .prettierrc --write \"./src/**/*.ts\" package.json",
-        "prettier-watch": "onchange \"./src/**/*.ts\" -- prettier --config .prettierrc --write \"{{changed}}\"",
         "TODO: test": "jest --runInBand --detectOpenHandles --forceExit --setupFiles dotenv/config",
+        "lint": "tslint -p tsconfig.json",
+        "prettier": "prettier --config .prettierrc --write \"./src/**/*.ts\" package.json",
+        "pretty-imports": "npx organize-imports-cli tsconfig.json",
+        "prettier-watch": "onchange \"./src/**/*.ts\" -- prettier --config .prettierrc --write \"{{changed}}\"",
+        "prettier-commit": "git diff --exit-code && npm run pretty-imports && npm run prettier && git add . && git commit --allow-empty -m \"Prettier\"",
         "build": "tsc",
         "deploy": "gcloud functions deploy pdfmaker --trigger-http --runtime nodejs12 --region=europe-west3 --memory=1024mb",
         "logs": "gcloud functions logs read pdfmaker",
-        "preversion": "npm test",
-        "postversion": "git push && git push --tags && npm run build && npm run deploy"
+        "preversion": "npm test && npm run prettier-commit && npm run lint && npm run build",
+        "postversion": "git push && git push --tags && npm run deploy"
     },
     "dependencies": {
         "aws-sdk": "^2.762.0",
@@ -54,6 +57,7 @@
         "prettier": "^1.19.1",
         "supertest": "^4.0.2",
         "ts-node": "^7.0.1",
+        "tslint": "^6.1.3",
         "typescript": "^3.7.5"
     }
 }
