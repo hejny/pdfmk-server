@@ -1,6 +1,7 @@
 import React from 'react';
 import { SELF_URL } from '../../config';
 
+// TODO: Take defaults from config not from hardcoded puppeteer options
 export function AboutInteractiveForm() {
     return (
         <form action="../make" method="get" target="_blank">
@@ -8,7 +9,7 @@ export function AboutInteractiveForm() {
             <p>
                 <label>
                     <b>Url:</b>
-                    <input type="text" name="url" placeholder="${SELF_URL}/test" />
+                    <input type="text" name="url" placeholder={`${SELF_URL}/test`} />
                 </label>
             </p>
             <p>
@@ -33,6 +34,109 @@ export function AboutInteractiveForm() {
                 </label>
             </p>
 
+            <p>
+                <label>
+                    Scale of the webpage rendering: <i>(Default is 1)</i>
+                    <input type="number" name="scale" placeholder="1" />
+                </label>
+            </p>
+            <p>
+                <label>
+                    Print background graphics: <i>(Default is false)</i>
+                    <select name="printBackground">
+                        <option value="true">true</option>
+                        <option value="false" selected>
+                            false
+                        </option>
+                    </select>
+                </label>
+            </p>
+
+            <p>
+                <label>
+                    Paper orientation.: <i>(Default is false)</i>
+                    <select name="landscape">
+                        <option value="true">true</option>
+                        <option value="false" selected>
+                            false
+                        </option>
+                    </select>
+                </label>
+            </p>
+
+            <p>
+                <label>
+                    Paper ranges to print, e.g., '1-5, 8, 11-13'.: <i>(Default is "" which means print all pages)</i>
+                    <input type="text" name="pageRanges" placeholder="1-5, 8, 11-13" />
+                </label>
+            </p>
+
+            <p>
+                <label>
+                    Paper format. If set, takes priority over width or height options.: <i>(Default is "Letter")</i>
+                    <select name="format">
+                        <option value="Legal" selected>
+                            Legal
+                        </option>
+                        <option value="Tabloid">Tabloid</option>
+                        <option value="Ledger">Ledger</option>
+                        <option value="A0">A0</option>
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                        <option value="A3">A3</option>
+                        <option value="A4">A4</option>
+                        <option value="A5">A5</option>
+                        <option value="A6">A6</option>
+                    </select>
+                </label>
+            </p>
+
+            <p>
+                <label>
+                    <b>Width:</b>
+                    <input type="string" name="width" placeholder="21cm" />
+                </label>
+                <label>
+                    <b>Height:</b>
+                    <input type="string" name="height" placeholder="29.7cm" />
+                </label>
+                <i>Values can be in pixels like "1920" or in other units "29.7cm".</i>
+            </p>
+
+            <p>
+                INTERFACE
+                <label>
+                    <b>Top:</b>
+                    <input type="string" name="top" placeholder="1cm" />
+                </label>
+                <label>
+                    <b>Right:</b>
+                    <input type="string" name="top" placeholder="1cm" />
+                </label>
+                <label>
+                    <b>Bottom:</b>
+                    <input type="string" name="top" placeholder="1cm" />
+                </label>
+                <label>
+                    <b>Left:</b>
+                    <input type="string" name="top" placeholder="1cm" />
+                </label>
+                <i>Values can be in pixels like "1920" or in other units "29.7cm".</i>
+            </p>
+
+            <p>
+                <label>
+                    Give any CSS page size declared in the page priority over what is declared in width and * height or
+                    format options.: <i>(Default is false which will scale the content to fit the paper size.</i>
+                    <select name="preferCSSPageSize">
+                        <option value="true">true</option>
+                        <option value="false" selected>
+                            false
+                        </option>
+                    </select>
+                </label>
+            </p>
+
             <h3>Page additional</h3>
             <p>
                 <label>
@@ -43,26 +147,24 @@ export function AboutInteractiveForm() {
                     <b>Footer</b>
                     <textarea name="footerTemplate"></textarea>
                 </label>
-                <i>
-                    Both should be valid HTML markup with following classes used to inject printing values into them:
-                    <ul>
-                        <li>
-                            <b>date</b> formatted print date
-                        </li>
-                        <li>
-                            <b>title</b> document title
-                        </li>
-                        <li>
-                            <b>url</b> document location
-                        </li>
-                        <li>
-                            <b>pageNumber</b> current page number
-                        </li>
-                        <li>
-                            <b>totalPages</b> total pages in the document
-                        </li>
-                    </ul>
-                </i>
+                Both should be valid HTML markup with following classes used to inject printing values into them:
+                <ul>
+                    <li>
+                        <b>date</b> formatted print date
+                    </li>
+                    <li>
+                        <b>title</b> document title
+                    </li>
+                    <li>
+                        <b>url</b> document location
+                    </li>
+                    <li>
+                        <b>pageNumber</b> current page number
+                    </li>
+                    <li>
+                        <b>totalPages</b> total pages in the document
+                    </li>
+                </ul>
             </p>
 
             <h3>Postprocessing</h3>
@@ -75,60 +177,6 @@ export function AboutInteractiveForm() {
         </form>
     );
 }
-
-`
-  /**
-   * Scale of the webpage rendering.
-   * @default 1
-   */
-  scale?: number;
-
-
-
-
-  /**
-   * Print background graphics.
-   * @default false
-   */
-  printBackground?: boolean;
-  /**
-   * Paper orientation.
-   * @default false
-   */
-  landscape?: boolean;
-  /**
-   * Paper ranges to print, e.g., '1-5, 8, 11-13'.
-   * @default '' which means print all pages.
-   */
-  pageRanges?: string;
-  /**
-   * Paper format. If set, takes priority over width or height options.
-   * @default 'Letter'
-   */
-  format?: PDFFormat;
-  /** Paper width. */
-  width?: LayoutDimension;
-  /** Paper height. */
-  height?: LayoutDimension;
-  /** Paper margins, defaults to none. */
-  margin?: {
-    /** Top margin. */
-    top?: LayoutDimension;
-    /** Right margin. */
-    right?: LayoutDimension;
-    /** Bottom margin. */
-    bottom?: LayoutDimension;
-    /** Left margin. */
-    left?: LayoutDimension;
-  };
-  /**
-   * Give any CSS @page size declared in the page priority over what is declared in width and
-   * height or format options.
-   * @default false which will scale the content to fit the paper size.
-   */
-  preferCSSPageSize?: boolean;
-
-`;
 
 /*
 <p><label>

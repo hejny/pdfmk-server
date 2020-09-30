@@ -2,7 +2,7 @@ import React from 'react';
 import { AboutInteractiveForm } from './AboutInteractiveForm';
 import { PDFOptions } from 'puppeteer';
 import { SELF_URL, version } from '../../config';
-import { GitHubCorner } from './GithubCorner';
+import { GitHubCorner } from './GitHubCorner';
 
 export function AboutSamples() {
     return (

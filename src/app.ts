@@ -2,11 +2,11 @@ import { json } from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import http from 'http';
-import { version } from './config';
+
+import { aboutRouteHandler } from './routes/about/aboutRouteHandler';
 import { makeRouteHandler } from './routes/makeRouteHandler';
-import { testHttpStatusCodeRouteHandler } from './routes/testHttpStatusCodeRouteHandler';
-import { aboutRouteHandler } from './routes/aboutRouteHandler';
 import { testRouteHandler } from './routes/test/testTouteHandler';
+import { testHttpStatusCodeRouteHandler } from './routes/testHttpStatusCodeRouteHandler';
 
 export function createApp(): { app: express.Application; server: http.Server } {
     const app = express();
