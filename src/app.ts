@@ -5,7 +5,7 @@ import http from 'http';
 
 import { aboutRouteHandler } from './routes/about/aboutRouteHandler';
 import { makeRouteHandler } from './routes/make/makeRouteHandler';
-import { testRouteHandler } from './routes/test/testTouteHandler';
+import { testRouteHandler } from './routes/test/testRouteHandler';
 import { testHttpStatusCodeRouteHandler } from './routes/testHttpStatusCodeRouteHandler';
 
 export function createApp(): { app: express.Application; server: http.Server } {
