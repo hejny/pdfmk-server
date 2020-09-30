@@ -17,6 +17,7 @@ export const SELF_URL = config
     .value.toString()
     .replace(/\/+$/g, '');
 
+// TODO: !!! Use
 export const ALLOWED_DOMAINS = config
     .get('ALLOWED_DOMAINS')
     .list()
@@ -28,6 +29,9 @@ export const PUPPETEER_LAUNCH_OPTIONS = config
     .json()
     .default({}).value;
 
+/**
+ * @deprecated
+ */
 export const PUPPETEER_PDF_OPTIONS = config
     .get('PUPPETEER_PDF_OPTIONS')
     .json()
