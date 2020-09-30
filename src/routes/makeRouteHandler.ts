@@ -41,10 +41,6 @@ export const makeRouteHandler: RequestHandler = async (request, response, next) 
             .get('waitUntil', 'Wait until (see https://pptr.dev/#?product=Puppeteer&show=api-pagegotourl-options).')
             .asType<LoadEvent>().value;
 
-        /*if(renderOnCallback && renderOnCallback!=='callPhantom'){
-            throw new Error('Callback must be exactly "callPhantom". In future this will be repaired.');
-        }*/
-
         // TODO: Pass file name in query parameters
         const content = await getConvertedFile(url.toString(), pdfOptions, noCache, renderOnCallback, waitUntil);
 

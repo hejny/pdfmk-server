@@ -2,6 +2,7 @@ import React from 'react';
 import { SELF_URL } from '../../config';
 
 // TODO: Take defaults from config not from hardcoded puppeteer options
+// TODO: Show names or prepared URL
 export function AboutInteractiveForm() {
     return (
         <form action="../make" method="get" target="_blank">
@@ -16,6 +17,27 @@ export function AboutInteractiveForm() {
                 <label>
                     <input type="checkbox" name="incognito" />
                     Use <b>incognito</b> browser tab.
+                </label>
+            </p>
+            <h3>Timing</h3>
+            <p>
+                <label>
+                    <b>Wait until:</b>
+                    <select name="waitUntil">
+                        <option value="" selected>
+                            &lt;Do not wait&gt;
+                        </option>
+                        <option value="load">load</option>
+                        <option value="domcontentloaded">domcontentloaded</option>
+                        <option value="networkidle0">networkidle0</option>
+                        <option value="networkidle2">networkidle2</option>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <b>Render on callback:</b>
+                    <input type="text" name="renderOnCallback" placeholder="renderMe" />
                 </label>
             </p>
             <h3>Conversion</h3>
@@ -33,7 +55,6 @@ export function AboutInteractiveForm() {
                     Convert page into <b>JSG</b> image.
                 </label>
             </p>
-
             <p>
                 <label>
                     Scale of the webpage rendering: <i>(Default is 1)</i>
@@ -51,7 +72,6 @@ export function AboutInteractiveForm() {
                     </select>
                 </label>
             </p>
-
             <p>
                 <label>
                     Paper orientation.: <i>(Default is false)</i>
@@ -63,14 +83,12 @@ export function AboutInteractiveForm() {
                     </select>
                 </label>
             </p>
-
             <p>
                 <label>
                     Paper ranges to print, e.g., '1-5, 8, 11-13'.: <i>(Default is "" which means print all pages)</i>
                     <input type="text" name="pageRanges" placeholder="1-5, 8, 11-13" />
                 </label>
             </p>
-
             <p>
                 <label>
                     Paper format. If set, takes priority over width or height options.: <i>(Default is "Letter")</i>
@@ -90,7 +108,6 @@ export function AboutInteractiveForm() {
                     </select>
                 </label>
             </p>
-
             <p>
                 <label>
                     <b>Width:</b>
@@ -102,9 +119,7 @@ export function AboutInteractiveForm() {
                 </label>
                 <i>Values can be in pixels like "1920" or in other units "29.7cm".</i>
             </p>
-
             <p>
-                INTERFACE
                 <label>
                     <b>Top:</b>
                     <input type="string" name="top" placeholder="1cm" />
@@ -123,7 +138,6 @@ export function AboutInteractiveForm() {
                 </label>
                 <i>Values can be in pixels like "1920" or in other units "29.7cm".</i>
             </p>
-
             <p>
                 <label>
                     Give any CSS page size declared in the page priority over what is declared in width and * height or
@@ -136,7 +150,6 @@ export function AboutInteractiveForm() {
                     </select>
                 </label>
             </p>
-
             <h3>Page additional</h3>
             <p>
                 <label>
@@ -166,12 +179,25 @@ export function AboutInteractiveForm() {
                     </li>
                 </ul>
             </p>
-
             <h3>Postprocessing</h3>
             <p>TODO:</p>
-
             <h3>Cashing</h3>
             <p>TODO:</p>
+            <h3>Output</h3>
+
+            <p>
+                <label>
+                    <input type="checkbox" name="download" />
+                    <b>Download</b> instead of showing in browser tab.
+                </label>
+            </p>
+
+            <p>
+                <label>
+                    <b>Error message:</b>
+                    <textarea name="errorMessage" placeholder="Sorry, there was a problem..."></textarea>
+                </label>
+            </p>
 
             <input type="submit" value="Generate" />
         </form>

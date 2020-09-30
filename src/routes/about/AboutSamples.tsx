@@ -10,11 +10,13 @@ export function AboutSamples() {
             <h1>PDF Maker</h1>
 
             {/* TODO: More info */}
-            <p>Version: ${version}</p>
+            <p>Version: {version}</p>
 
             <h2>Interactive</h2>
             <AboutInteractiveForm />
 
+            {/*
+            TODO:
             <h2>Basics</h2>
             <ul>
                 <li>
@@ -189,7 +191,7 @@ export function AboutSamples() {
         `,
                     )
                     .join('\n')}
-            </ul>
+            </ul> */}
 
             <GitHubCorner />
         </>
