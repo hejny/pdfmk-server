@@ -1,7 +1,13 @@
-import { createApp } from "./app";
-import { PORT } from "./config";
+import { createApp } from './app';
 
 const { app } = createApp();
+
+exports.pdfmaker = app;
+
+/*
+Note: Google cloud functions runs this automatically
+
+import { PORT } from "./config";
 
 app.listen(PORT, () => {
     console.info('██████████████████████████████████████████');
@@ -15,4 +21,3 @@ process.on('unhandledRejection', (err) => {
     console.error(err);
 });
 */
-

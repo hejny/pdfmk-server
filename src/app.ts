@@ -1,11 +1,12 @@
-import { htmlToPdfRouteHandler } from './routes/htmlToPdfRouteHandler';
-import express from 'express';
-import cors from 'cors';
-import http from 'http';
 import { json } from 'body-parser';
-import { testRouteHandler } from './routes/testRouteHandler';
+import cors from 'cors';
+import express from 'express';
+import http from 'http';
+
+import { aboutRouteHandler } from './routes/about/aboutRouteHandler';
+import { makeRouteHandler } from './routes/make/makeRouteHandler';
+import { testRouteHandler } from './routes/test/testRouteHandler';
 import { testHttpStatusCodeRouteHandler } from './routes/testHttpStatusCodeRouteHandler';
-import { version } from './config';
 
 export function createApp(): { app: express.Application; server: http.Server } {
     const app = express();
@@ -19,16 +20,11 @@ export function createApp(): { app: express.Application; server: http.Server } {
         console.error(err);
     });
 
-    app.get('/about', async (request, response) => {
-        response.send({
-            version,
-        });
-    });
-
-    app.get('/html/pdf', htmlToPdfRouteHandler);
-
-    app.get(['/', '/test'], testRouteHandler);
+    app.get('/', aboutRouteHandler);
+    app.get('/test', testRouteHandler);
     app.get('/test/httpStatusCode/:statusCode', testHttpStatusCodeRouteHandler);
+
+    app.get('/make', makeRouteHandler);
 
     return {
         app,

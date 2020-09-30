@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+# Build
+dist
+
 # IDEs
 .idea
 .vscode/*
@@ -13,4 +16,5 @@
 
 .env
 
+# Other
 preconvert.txt

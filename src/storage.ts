@@ -1,3 +1,4 @@
+/*
 import { config, S3 } from 'aws-sdk';
 import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_S3_BUCKET_NAME } from './config';
 import * as uuid from 'uuid';
@@ -44,3 +45,4 @@ async function testStorage() {
         })
         .promise();
 }
+*/
