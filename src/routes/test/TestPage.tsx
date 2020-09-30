@@ -12,14 +12,14 @@ export function TestPage() {
             </p>
             <script>
                 {`
-                // TODO: To better place
+                /* TODO: To better place */
                 // TODO: ES6 Working module
                 document.getElementById("js-test").innerHTML = 'Javascript inside the page is working. ES6 <b>not</b> working.';
                 `}
             </script>
             <script>
                 {`
-                 // TODO: To better place
+                 /* TODO: To better place */
                 document.getElementById("js-test").innerHTML = \`Javascript inside the page is working. ES6 is working.\`;
                 `}
             </script>
@@ -28,7 +28,7 @@ export function TestPage() {
 
             <script>
                 {`
-                // TODO: To better place
+                /* TODO: To better place */
                 var i = 2;
                 var interval = setInterval(function(){
                     document.getElementById("countdown").innerHTML = i;
@@ -43,7 +43,7 @@ export function TestPage() {
 
             <script>
                 {`
-                // TODO: To better place
+                /* TODO: To better place */
                 if(location.search==='?words'){
                     var words = '';
                     for(var j=0;j<10000;j++){
@@ -56,7 +56,7 @@ export function TestPage() {
 
             <style>
                 {`
-                // TODO: To better place
+                /* TODO: To better place */
                 @media print {
                     body{
                         margin: 0;
