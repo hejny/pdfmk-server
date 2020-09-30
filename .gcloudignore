@@ -23,5 +23,5 @@ test
 jest.config.js
 tsconfig.json
 .vscode
-!dist
+!dist/**/*
 dist/**/*.map
