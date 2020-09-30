@@ -5,7 +5,7 @@ import { SELF_URL } from '../../config';
 // TODO: Show names or prepared URL
 export function AboutInteractiveForm() {
     return (
-        <form action="../make" method="get" target="_blank">
+        <form action={`${SELF_URL}/make`} method="get" target="_blank">
             <h3>Browser</h3>
             <div className="field">
                 <label>
