@@ -17,7 +17,6 @@ node_modules
 #!include:.gitignore
 
 src
-test
 .vscode
 .prettierrc
 jest.config.js
