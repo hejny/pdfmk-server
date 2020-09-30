@@ -29,7 +29,7 @@
     "dependencies": {
         "aws-sdk": "^2.762.0",
         "body-parse": "^0.1.0",
-        "configchecker": "^1.0.6",
+        "configchecker": "^1.2.0",
         "cors": "^2.8.4",
         "dotenv": "^6.1.0",
         "express": "^4.17.1",

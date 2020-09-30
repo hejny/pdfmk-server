@@ -15,14 +15,17 @@ export function AboutInteractiveForm() {
             </div>
             <div className="field">
                 <label>
-                    <input type="checkbox" name="incognito" />
+                    <input type="checkbox" name="incognito" value="yes" />
                     Use <b>incognito</b> browser tab.
                 </label>
             </div>
             <h3>Timing</h3>
             <div className="field">
                 <label>
-                    <b>Wait until:</b>
+                    <b>Wait until: </b>
+                    <i>
+                        <a href="https://pptr.dev/#?product=Puppeteershow=api-pagegotourl-options">(see more)</a>
+                    </i>
                     <select name="waitUntil">
                         <option value="" selected>
                             &lt;Do not wait&gt;
@@ -41,32 +44,34 @@ export function AboutInteractiveForm() {
                 </label>
             </div>
 
+            {/* TODO: We can add here waiting for selector */}
+
             <h3>Output</h3>
 
             <div className="field">
                 <label>
-                    <input type="radio" name="format" value="pdf" />
+                    <input type="radio" name="type" value="pdf" />
                     Convert page into <b>PDF</b> document.
                 </label>
                 <label>
-                    <input type="radio" name="format" value="png" />
+                    <input type="radio" name="type" value="png" />
                     Convert page into <b>PNG</b> image.
                 </label>
                 <label>
-                    <input type="radio" name="format" value="jpg" />
-                    Convert page into <b>JPG</b> image.
+                    <input type="radio" name="type" value="jpeg" />
+                    Convert page into <b>JPEG</b> image.
                 </label>
             </div>
 
             <div className="field">
                 <label>
-                    <input type="checkbox" name="download" />
+                    <input type="checkbox" name="download" value="yes" />
                     <b>Download</b> instead of showing in browser tab.
                 </label>
             </div>
             <div className="field">
                 <label>
-                    <b>Error message:</b>
+                    <b>Error message:</b> <i>(Write "DEBUG" if you want to see more technical info.)</i>
                     <textarea name="errorMessage" placeholder="Sorry, there was a problem..."></textarea>
                 </label>
             </div>
@@ -74,16 +79,16 @@ export function AboutInteractiveForm() {
             <div className="only-images">
                 <h3>Conversion for Images</h3>
 
-                <div className="only-jpg">
+                <div className="only-jpeg">
                     <label>
-                        The quality of the image, between 0-100. <i>(Only for JPG)</i>
+                        The quality of the image, between 0-100. <i>(Only for JPEG)</i>
                         <input type="number" name="quality" placeholder="80" />
                     </label>
                 </div>
                 <div className="field">
                     <label>
                         When true, takes a screenshot of the full scrollable page.
-                        <select name="landscape">
+                        <select name="fullPage">
                             <option value="true">true</option>
                             <option value="false" selected>
                                 false
@@ -163,11 +168,12 @@ export function AboutInteractiveForm() {
                 </div>
                 <div className="field">
                     <label>
-                        Paper format. If set, takes priority over width or height options.: <i>(Default is "Letter")</i>
+                        <b>Paper format:</b> <i>(If set, takes priority over width or height options bellow.)</i>
                         <select name="format">
-                            <option value="Legal" selected>
-                                Legal
+                            <option value="" selected>
+                                &lt;Do not set&gt;
                             </option>
+                            <option value="Legal">Legal</option>
                             <option value="Tabloid">Tabloid</option>
                             <option value="Ledger">Ledger</option>
                             <option value="A0">A0</option>
@@ -181,6 +187,7 @@ export function AboutInteractiveForm() {
                     </label>
                 </div>
                 <div className="field">
+                    <b>Paper size:</b> <i>(It can be overwritten by Paper format.)</i>
                     <label>
                         <b className="fix">Width:</b>
                         <input type="string" name="width" placeholder="21cm" />
@@ -192,21 +199,22 @@ export function AboutInteractiveForm() {
                     <i>Values can be in pixels like "1920" or in other units "29.7cm".</i>
                 </div>
                 <div className="field">
+                    <b>Margin:</b>
                     <label>
                         <b className="fix">Top:</b>
-                        <input type="string" name="top" placeholder="1cm" />
+                        <input type="string" name="marginTop" placeholder="1cm" />
                     </label>
                     <label>
                         <b className="fix">Right:</b>
-                        <input type="string" name="top" placeholder="1cm" />
+                        <input type="string" name="marginRight" placeholder="1cm" />
                     </label>
                     <label>
                         <b className="fix">Bottom:</b>
-                        <input type="string" name="top" placeholder="1cm" />
+                        <input type="string" name="marginBottom" placeholder="1cm" />
                     </label>
                     <label>
                         <b className="fix">Left:</b>
-                        <input type="string" name="top" placeholder="1cm" />
+                        <input type="string" name="marginleft" placeholder="1cm" />
                     </label>
                     <i>Values can be in pixels like "1920" or in other units "29.7cm".</i>
                 </div>

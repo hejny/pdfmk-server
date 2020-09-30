@@ -4,7 +4,7 @@ import express from 'express';
 import http from 'http';
 
 import { aboutRouteHandler } from './routes/about/aboutRouteHandler';
-import { makeRouteHandler } from './routes/makeRouteHandler';
+import { makeRouteHandler } from './routes/make/makeRouteHandler';
 import { testRouteHandler } from './routes/test/testTouteHandler';
 import { testHttpStatusCodeRouteHandler } from './routes/testHttpStatusCodeRouteHandler';
 
