@@ -1,5 +1,6 @@
 import { createHash } from 'crypto';
 import { LoadEvent, PDFOptions } from 'puppeteer';
+import { ALLOWED_DOMAINS } from '../config';
 import { parse } from 'url';
 // TODO: !!! import { CACHE_DIR, ALLOWED_DOMAINS } from '../config';
 //import { cacheFileUpload } from './cacheFileUpload';
@@ -15,15 +16,14 @@ export async function getConvertedFile(
 ): Promise<Buffer> {
     const parsedURL = parse(url);
 
-    /* TODO: !!!
     if (!parsedURL.hostname || !ALLOWED_DOMAINS.includes(parsedURL.hostname)) {
+        // TODO: Allow * in domain or allow all subdomains or RegExp
         throw new Error(
             `URL "${url}" (domain "${parsedURL.hostname}") is not in whitelisted domain list ${(
                 ALLOWED_DOMAINS || []
             ).join(', ')}.`,
         );
     }
-    */
 
     const pdfKey = parsedURL.hostname + '/' + url.split('/').join('-');
     // TODO: Other things as pdfOptions, renderOnCallback and waitUntil to cache hash

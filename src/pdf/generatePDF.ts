@@ -1,5 +1,5 @@
 import puppeteer, { LoadEvent, PDFOptions } from 'puppeteer';
-//import { PUPPETEER_LAUNCH_OPTIONS, PUPPETEER_PDF_OPTIONS } from '../config';
+import { PUPPETEER_LAUNCH_OPTIONS, PUPPETEER_PDF_OPTIONS } from '../config';
 
 export async function generatePDF(
     url: string,
@@ -9,11 +9,7 @@ export async function generatePDF(
     waitUntil: LoadEvent = 'domcontentloaded',
 ): Promise<Buffer> {
     try {
-        const browser = await puppeteer.launch({
-            args: ['-no-sandbox'],
-        });
-
-        /* TODO: !!!({ ...PUPPETEER_LAUNCH_OPTIONS })*/
+        const browser = await puppeteer.launch({ ...PUPPETEER_LAUNCH_OPTIONS });
         const page = await browser.newPage();
         await page.setBypassCSP(true);
 
@@ -38,7 +34,7 @@ export async function generatePDF(
             await page.waitForSelector('.renderNow');
         }
 
-        const pdfOptionsComposed = { /*path: filePath*/ /* TODO: !!! ...PUPPETEER_PDF_OPTIONS, */ ...pdfOptions };
+        const pdfOptionsComposed = { /*path: filePath*/ ...PUPPETEER_PDF_OPTIONS, ...pdfOptions };
         // console.log('pdfOptionsComposed', pdfOptionsComposed);
 
         return await page.pdf(pdfOptionsComposed);

@@ -11,6 +11,8 @@ You need to install Google cloud SDK
 ---
 TODO:
 
+Work for other clouds
+
 ## ⤴️ Motivation
 ## 📖 Usage
 ## 📰 Changelog

@@ -6,6 +6,6 @@ export const testHttpStatusCodeRouteHandler: RequestHandler = async (request, re
     const statusCode = parseInt(statusCode_);
 
     response.status(statusCode).send(`
-        <h1>Testing HTTP status code ${statusCode}</h1>
+        <h1>PDF Maker – Testing HTTP status code ${statusCode}</h1>
     `);
 };
