@@ -1,5 +1,5 @@
 import { PDFOptions, ScreenshotOptions } from 'puppeteer';
-import { IMakeConfigPdf, IMakeConfigImages } from './IMakeConfig';
+import { IMakeConfigImages, IMakeConfigPdf } from './IMakeConfig';
 
 export function cleanupConfigForPdf(config: IMakeConfigPdf): PDFOptions {
     const {

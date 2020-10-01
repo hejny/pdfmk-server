@@ -1,7 +1,5 @@
-import puppeteer, { BrowserContext, LoadEvent, Page, PDFOptions } from 'puppeteer';
-import { Viewport } from 'puppeteer/DeviceDescriptors';
-import { PUPPETEER_LAUNCH_OPTIONS, PUPPETEER_PDF_OPTIONS } from '../../config';
-import { IMakeConfig, IMakeConfigCommon } from './IMakeConfig';
+import { BrowserContext, Page } from 'puppeteer';
+import { IMakeConfig } from './IMakeConfig';
 
 export async function makeDocument(config: IMakeConfig, browserContext: BrowserContext): Promise<Page> {
     try {

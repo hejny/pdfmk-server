@@ -2,7 +2,6 @@ import { json } from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import http from 'http';
-
 import { aboutRouteHandler } from './routes/about/aboutRouteHandler';
 import { makeRouteHandler } from './routes/make/makeRouteHandler';
 import { testRouteHandler } from './routes/test/testRouteHandler';
