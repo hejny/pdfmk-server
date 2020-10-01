@@ -1,11 +1,20 @@
 import puppeteer, { BrowserContext, LoadEvent, Page, PDFOptions } from 'puppeteer';
+import { Viewport } from 'puppeteer/DeviceDescriptors';
 import { PUPPETEER_LAUNCH_OPTIONS, PUPPETEER_PDF_OPTIONS } from '../../config';
-import { IMakeConfigCommon } from './IMakeConfig';
+import { IMakeConfig, IMakeConfigCommon } from './IMakeConfig';
 
-export async function makeDocument(config: IMakeConfigCommon, browserContext: BrowserContext): Promise<Page> {
+export async function makeDocument(config: IMakeConfig, browserContext: BrowserContext): Promise<Page> {
     try {
         const page = await browserContext.newPage();
         await page.setBypassCSP(true /* TODO: Maybe also to config */);
+
+        // TODO: Maybe deviceScaleFactor
+
+        if (config.type === 'png' || config.type === 'jpeg') {
+            if (config.width && config.height) {
+                await page.setViewport({ width: config.width, height: config.height });
+            }
+        }
 
         await page.goto(config.url.toString(), {
             waitUntil: config.waitUntil,
