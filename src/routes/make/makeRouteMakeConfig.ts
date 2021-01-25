@@ -1,6 +1,6 @@
 import { ConfigChecker } from 'configchecker';
 import { LoadEvent } from 'puppeteer';
-import { IMakeConfig } from './IMakeConfig';
+import { IMakeConfig, IMakeConfigJpeg, IMakeConfigPdf, IMakeConfigPng } from './IMakeConfig';
 
 // prettier-ignore
 // TODO: Ignore only one block when it will be possible https://github.com/prettier/prettier/issues/5287
@@ -18,7 +18,7 @@ export function makeRouteMakeConfig(query: ConfigChecker): IMakeConfig {
 
     switch(type){
         case 'pdf':
-
+        {
             const scale=query.get('scale').number().value;
             const printBackground=query.get('printBackground').boolean().default(false).value!;
             const landscape=query.get('landscape').boolean().default(false).value!;
@@ -35,11 +35,13 @@ export function makeRouteMakeConfig(query: ConfigChecker): IMakeConfig {
 
             const margin = {top:marginTop,right:marginRight,bottom:marginBottom,left:marginlLeft};
 
-            return({...common,type,scale,printBackground,landscape,pageRanges,width,height,margin,preferCSSPageSize,headerTemplate,footerTemplate});
-
+            return({...common,type,scale,printBackground,landscape,pageRanges,width,height,margin,preferCSSPageSize,headerTemplate,footerTemplate} as IMakeConfigPdf);
+        }
         case 'jpeg':
         case 'png':
-
+        {
+            const width=query.get('width').number().value;
+            const height=query.get('height').number().value;
             const fullPage =query.get('clipX').boolean().default(false).value!;
             const clipX=query.get('clipX').number().value;
             const clipY=query.get('clipY').number().value;
@@ -54,14 +56,14 @@ export function makeRouteMakeConfig(query: ConfigChecker): IMakeConfig {
             if(type==='jpeg'){
 
                 const quality=query.get('quality').number().required().value!;
-                return({...common,type,quality,fullPage,clip,omitBackground});
+                return({...common,type,quality,width,height,fullPage,clip,omitBackground} as IMakeConfigJpeg);
 
             }else{
 
-                return({...common,type,clip,omitBackground});
+                return({...common,type,clip,omitBackground} as IMakeConfigPng);
 
             }
-           
+        }
 
     }
 

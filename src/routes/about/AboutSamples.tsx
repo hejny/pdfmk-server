@@ -1,7 +1,6 @@
 import React from 'react';
+import { version } from '../../config';
 import { AboutInteractiveForm } from './AboutInteractiveForm';
-import { PDFOptions } from 'puppeteer';
-import { SELF_URL, version } from '../../config';
 import { GitHubCorner } from './GitHubCorner';
 
 export function AboutSamples() {

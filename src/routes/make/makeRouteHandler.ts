@@ -1,15 +1,14 @@
 import { ConfigChecker } from 'configchecker';
-import e, { RequestHandler } from 'express';
+import { RequestHandler } from 'express';
 import puppeteer, { BrowserContext, Page } from 'puppeteer';
 import { parse as parseQuerystring } from 'querystring';
-import { PUPPETEER_LAUNCH_OPTIONS } from '../../config';
 import { parse as parseUrl } from 'url';
-
+import { PUPPETEER_LAUNCH_OPTIONS } from '../../config';
+import { cleanupConfigForImages, cleanupConfigForPdf } from './cleanupConfig';
+import { extensionToContentType } from './extensionToContentType';
+import { IMakeConfigImages, IMakeConfigPdf } from './IMakeConfig';
 import { makeDocument } from './makeDocument';
 import { makeRouteMakeConfig } from './makeRouteMakeConfig';
-import { cleanupConfigForImages, cleanupConfigForPdf } from './cleanupConfig';
-import { IMakeConfigPdf, IMakeConfigImages } from './IMakeConfig';
-import { extensionToContentType } from './extensionToContentType';
 
 const browserPromise = puppeteer.launch({ ...PUPPETEER_LAUNCH_OPTIONS });
 
