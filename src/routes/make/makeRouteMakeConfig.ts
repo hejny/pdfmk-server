@@ -23,6 +23,7 @@ export function makeRouteMakeConfig(query: ConfigChecker): IMakeConfig {
             const printBackground=query.get('printBackground').boolean().default(false).value!;
             const landscape=query.get('landscape').boolean().default(false).value!;
             const pageRanges=query.get('pageRanges').value;
+            const format=query.get('format').value;
             const width=query.get('width').value;
             const height=query.get('height').value;
             const marginTop=query.get('marginTop').value;
@@ -35,7 +36,7 @@ export function makeRouteMakeConfig(query: ConfigChecker): IMakeConfig {
 
             const margin = {top:marginTop,right:marginRight,bottom:marginBottom,left:marginlLeft};
 
-            return({...common,type,scale,printBackground,landscape,pageRanges,width,height,margin,preferCSSPageSize,headerTemplate,footerTemplate} as IMakeConfigPdf);
+            return({...common,type,scale,printBackground,landscape,pageRanges,format,width,height,margin,preferCSSPageSize,headerTemplate,footerTemplate} as IMakeConfigPdf);
         }
         case 'jpeg':
         case 'png':
