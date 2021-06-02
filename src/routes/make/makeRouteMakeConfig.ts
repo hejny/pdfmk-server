@@ -50,20 +50,10 @@ export function makeRouteMakeConfig(query: ConfigChecker): IMakeConfig {
             const clipHeight=query.get('clipHeight').number().value;
             const omitBackground=query.get('omitBackground').boolean().default(false).value!;
 
-        
-        
             const clip = (clipX&&clipY&&clipWidth&&clipHeight)?{x:clipX,y:clipY,width:clipWidth,height:clipHeight}:undefined;
+            const quality=query.get('quality').number().value;
 
-            if(type==='jpeg'){
-
-                const quality=query.get('quality').number().required().value!;
-                return({...common,type,quality,width,height,fullPage,clip,omitBackground} as IMakeConfigJpeg);
-
-            }else{
-
-                return({...common,type,clip,omitBackground} as IMakeConfigPng);
-
-            }
+            return({...common,type,quality,width,height,fullPage,clip,omitBackground} as IMakeConfigJpeg);
         }
 
     }
