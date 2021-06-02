@@ -1,6 +1,6 @@
 import { ConfigChecker } from 'configchecker';
 import { LoadEvent } from 'puppeteer';
-import { IMakeConfig, IMakeConfigJpeg, IMakeConfigPdf, IMakeConfigPng } from './IMakeConfig';
+import { IMakeConfig, IMakeConfigJpeg, IMakeConfigPdf } from './IMakeConfig';
 
 // prettier-ignore
 // TODO: Ignore only one block when it will be possible https://github.com/prettier/prettier/issues/5287
