@@ -8,7 +8,7 @@
     "url": "https://github.com/hejny/pdfmk-server"
   },
   "author": "Pavol Hejný <me@pavolhejny.com> (https://www.pavolhejny.com/)",
-  "license": "ISC",
+  "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "start": "npm run develop",
     "develop": "npm-run-all --serial build --parallel _develop-server _develop-build",
