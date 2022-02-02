@@ -27,7 +27,7 @@
     "postversion": "git push && git push --tags && npm run deploy"
   },
   "dependencies": {
-    "aws-sdk": "^2.1066.0",
+    "aws-sdk": "2.1066.0",
     "body-parse": "0.1.0",
     "configchecker": "1.2.0",
     "cors": "2.8.4",
