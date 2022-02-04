@@ -63,5 +63,6 @@
     "ts-node": "7.0.1",
     "tslint": "6.1.3",
     "typescript": "3.7.5"
-  }
+  },
+  "description": "Look at https://www.pavolhejny.com/pdf-maker"
 }
