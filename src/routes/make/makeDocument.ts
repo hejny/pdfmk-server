@@ -16,7 +16,7 @@ export async function makeDocument(config: IMakeConfig, browserContext: BrowserC
 
         await page.goto(config.url.toString(), {
             waitUntil: config.waitUntil,
-            timeout:  1000 * 60 * 1 /* Minute */, // TODO: Configurable
+            timeout: 1000 * 60 * 1 /* Minute */, // TODO: Configurable
         });
 
         if (config.renderOnCallback) {
