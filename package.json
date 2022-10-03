@@ -14,6 +14,7 @@
         "develop": "npm-run-all --serial build --parallel _develop-server _develop-build",
         "_develop-server": "cross-env NODE_ENV=development functions-framework --watch --target=pdfmaker",
         "_develop-build": "tsc --watch",
+        "test": "",
         "TODO: test": "jest --runInBand --detectOpenHandles --forceExit --setupFiles dotenv/config",
         "lint": "tslint -p tsconfig.json",
         "prettier": "prettier --config .prettierrc --write \"./src/**/*.{ts,tsx}\" package.json",
