@@ -16,17 +16,17 @@ export async function makeDocument(config: IMakeConfig, browserContext: BrowserC
 
         await page.goto(config.url.toString(), {
             waitUntil: config.waitUntil,
-            timeout: 10000, // TODO: Configurable
+            timeout:  1000 * 60 * 1 /* Minute */, // TODO: Configurable
         });
 
         if (config.renderOnCallback) {
             // TODO: This is a bit hack can it be done somehow better?
             await page.evaluate(`window.${config.renderOnCallback} = ()=>{
-                
+
                 const renderNow = document.createElement("SPAN");
                 renderNow.classList.add('renderNow');
                 document.body.appendChild(renderNow);
-                
+
             }
             //window.${config.renderOnCallback}();
             `);
