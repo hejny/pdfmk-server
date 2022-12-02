@@ -44,10 +44,10 @@ export const makeRouteHandler: RequestHandler = async (request, response, next) 
         if (config.type === 'pdf') {
             document = await page.pdf(cleanupConfigForPdf(config as IMakeConfigPdf));
         } else {
-            document = await page.screenshot({
+            document = (await page.screenshot({
                 ...cleanupConfigForImages(config as IMakeConfigImages),
                 encoding: 'binary',
-            }) as Buffer;
+            })) as Buffer;
         }
 
         return response

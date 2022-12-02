@@ -1,4 +1,4 @@
-import { PuppeteerLifeCycleEvent, PDFOptions, ScreenshotOptions } from 'puppeteer';
+import { PDFOptions, PuppeteerLifeCycleEvent, ScreenshotOptions } from 'puppeteer';
 
 // TODO: Theese configs maybe to client
 
