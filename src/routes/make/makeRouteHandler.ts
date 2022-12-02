@@ -47,7 +47,7 @@ export const makeRouteHandler: RequestHandler = async (request, response, next) 
             document = await page.screenshot({
                 ...cleanupConfigForImages(config as IMakeConfigImages),
                 encoding: 'binary',
-            });
+            }) as Buffer;
         }
 
         return response
@@ -90,6 +90,6 @@ export const makeRouteHandler: RequestHandler = async (request, response, next) 
             .contentType('application/pdf')
             .header('Content-disposition', `${download ? `attachment; filename="${download}.pdf"` : 'inline'}`)
             .send(content);
-   
+
     */
 };

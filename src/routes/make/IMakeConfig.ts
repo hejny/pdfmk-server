@@ -1,4 +1,4 @@
-import { LoadEvent, PDFOptions, ScreenshotOptions } from 'puppeteer';
+import { PuppeteerLifeCycleEvent, PDFOptions, ScreenshotOptions } from 'puppeteer';
 
 // TODO: Theese configs maybe to client
 
@@ -28,6 +28,6 @@ export interface IMakeConfigCommon {
     url: URL;
     download: boolean;
     incognito: boolean;
-    waitUntil: LoadEvent;
+    waitUntil: PuppeteerLifeCycleEvent;
     renderOnCallback?: string;
 }

@@ -1,17 +1,17 @@
 import { ConfigChecker } from 'configchecker';
-import { LoadEvent } from 'puppeteer';
+import { PuppeteerLifeCycleEvent } from 'puppeteer';
 import { IMakeConfig, IMakeConfigJpeg, IMakeConfigPdf } from './IMakeConfig';
 
 // prettier-ignore
 // TODO: Ignore only one block when it will be possible https://github.com/prettier/prettier/issues/5287
 export function makeRouteMakeConfig(query: ConfigChecker): IMakeConfig {
-    
+
     // Common
     const url = query.get('url').url().required().value;
     const type = query.get('type').asType<'pdf'|'png'|'jpeg'>().required().value;
     const download = query.get('download').boolean().default(false).value!;
     const incognito = query.get('incognito').boolean().default(false).value!;
-    const waitUntil = query.get('waitUntil').asType<LoadEvent>().value;
+    const waitUntil = query.get('waitUntil').asType<PuppeteerLifeCycleEvent>().value;
     const renderOnCallback = query.get('renderOnCallback').value;
 
     const common = {url,download,incognito,waitUntil,renderOnCallback};
