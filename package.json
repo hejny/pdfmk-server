@@ -1,6 +1,6 @@
 {
     "name": "pdfmk-server",
-    "version": "1.4.6",
+    "version": "1.4.7",
     "private": false,
     "main": "./dist/index.js",
     "repository": {
