@@ -35,7 +35,7 @@
         "dotenv": "6.1.0",
         "express": "4.17.1",
         "glob-promise": "3.4.0",
-        "isomorphic-fetch": "2.2.1",
+        "isomorphic-fetch": "3.0.0",
         "node-ssh": "7.0.0",
         "promise-sftp": "0.11.3",
         "puppeteer": "19.3.0",
