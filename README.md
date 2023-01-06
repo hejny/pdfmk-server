@@ -10,8 +10,12 @@
 
 <!--/Badges-->
 
-Look at https://www.pavolhejny.com/pdf-maker
+A very simple tool library for the waiting using Promises.
 
+## 🔗 Links
+
+- [Client](https://github.com/hejny/pdfmk/)
+- [Server](https://github.com/hejny/pdfmk-server/)
 
 ## Deploy
 
