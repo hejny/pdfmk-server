@@ -42,7 +42,7 @@
         "react": "16.13.1",
         "react-dom": "16.13.1",
         "uuid": "3.4.0",
-        "waitasecond": "^1.11.28"
+        "waitasecond": "1.11.28"
     },
     "devDependencies": {
         "@google-cloud/functions-framework": "1.7.1",
