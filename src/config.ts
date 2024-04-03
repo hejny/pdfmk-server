@@ -40,7 +40,7 @@ export const PUPPETEER_PDF_OPTIONS = config
     .value;
 
 /*
-Note: Google cloud functions does not neet port
+Note: Google cloud functions does not need port
 export const PORT = config
     .get('PORT')
     .number()
