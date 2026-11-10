@@ -26,8 +26,8 @@ export function AboutInteractiveForm() {
                     <i>
                         <a href="https://pptr.dev/#?product=Puppeteershow=api-pagegotourl-options">(see more)</a>
                     </i>
-                    <select name="waitUntil">
-                        <option value="" selected>
+                    <select name="waitUntil" defaultValue="">
+                        <option value="">
                             &lt;Do not wait&gt;
                         </option>
                         <option value="load">load</option>
@@ -88,11 +88,9 @@ export function AboutInteractiveForm() {
                 <div className="field">
                     <label>
                         When true, takes a screenshot of the full scrollable page.
-                        <select name="fullPage">
+                        <select name="fullPage" defaultValue="false">
                             <option value="true">true</option>
-                            <option value="false" selected>
-                                false
-                            </option>
+                            <option value="false">false</option>
                         </select>
                     </label>
                 </div>
@@ -120,11 +118,9 @@ export function AboutInteractiveForm() {
                     <label>
                         Hides default white background and allows capturing screenshots with transparency.{' '}
                         <i>(Default is false)</i>
-                        <select name="omitBackground">
+                        <select name="omitBackground" defaultValue="false">
                             <option value="true">true</option>
-                            <option value="false" selected>
-                                false
-                            </option>
+                            <option value="false">false</option>
                         </select>
                     </label>
                 </div>
@@ -140,22 +136,18 @@ export function AboutInteractiveForm() {
                 <div className="field">
                     <label>
                         Print background graphics: <i>(Default is false)</i>
-                        <select name="printBackground">
+                        <select name="printBackground" defaultValue="false">
                             <option value="true">true</option>
-                            <option value="false" selected>
-                                false
-                            </option>
+                            <option value="false">false</option>
                         </select>
                     </label>
                 </div>
                 <div className="field">
                     <label>
                         Paper orientation.: <i>(Default is false)</i>
-                        <select name="landscape">
+                        <select name="landscape" defaultValue="false">
                             <option value="true">true</option>
-                            <option value="false" selected>
-                                false
-                            </option>
+                            <option value="false">false</option>
                         </select>
                     </label>
                 </div>
@@ -169,8 +161,8 @@ export function AboutInteractiveForm() {
                 <div className="field">
                     <label>
                         <b>Paper format:</b> <i>(If set, takes priority over width or height options bellow.)</i>
-                        <select name="format">
-                            <option value="" selected>
+                        <select name="format" defaultValue="">
+                            <option value="">
                                 &lt;Do not set&gt;
                             </option>
                             <option value="Legal">Legal</option>
@@ -222,11 +214,9 @@ export function AboutInteractiveForm() {
                     <label>
                         Give any CSS page size declared in the page priority over what is declared in width and * height
                         or format options.: <i>(Default is false which will scale the content to fit the paper size.</i>
-                        <select name="preferCSSPageSize">
+                        <select name="preferCSSPageSize" defaultValue="false">
                             <option value="true">true</option>
-                            <option value="false" selected>
-                                false
-                            </option>
+                            <option value="false">false</option>
                         </select>
                     </label>
                 </div>

@@ -1,8 +1,6 @@
 import { ConfigChecker } from 'configchecker';
 import { RequestHandler } from 'express';
-import puppeteer, { BrowserContext, Page } from 'puppeteer';
-import { parse as parseQuerystring } from 'querystring';
-import { parse as parseUrl } from 'url';
+import puppeteer, { Browser, BrowserContext, Page } from 'puppeteer';
 import { PUPPETEER_LAUNCH_OPTIONS } from '../../config';
 import { cleanupConfigForImages, cleanupConfigForPdf } from './cleanupConfig';
 import { extensionToContentType } from './extensionToContentType';
@@ -10,10 +8,27 @@ import { IMakeConfigImages, IMakeConfigPdf } from './IMakeConfig';
 import { makeDocument } from './makeDocument';
 import { makeRouteMakeConfig } from './makeRouteMakeConfig';
 
-const browserPromise = puppeteer.launch({ ...PUPPETEER_LAUNCH_OPTIONS });
+let browserPromise: Promise<Browser> | null = null;
+
+function getBrowser(): Promise<Browser> {
+    if (!browserPromise) {
+        const defaultArgs = ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'];
+        const launchOptions: any = {
+            headless: true,
+            ...PUPPETEER_LAUNCH_OPTIONS,
+        };
+        launchOptions.args = Array.from(new Set([...(launchOptions.args || []), ...defaultArgs]));
+
+        browserPromise = puppeteer.launch(launchOptions).catch((error) => {
+            browserPromise = null;
+            throw error;
+        });
+    }
+    return browserPromise;
+}
 
 export const makeRouteHandler: RequestHandler = async (request, response, next) => {
-    const queryRaw = parseQuerystring(parseUrl(request.url).query || '') as Record<string, string>;
+    const queryRaw = (request.query || {}) as Record<string, string>;
     for (const key in queryRaw) {
         if (queryRaw[key] === '') {
             // TODO: This functionality should be in ConfigChecker - cast emptu strings as undefined
@@ -33,21 +48,25 @@ export const makeRouteHandler: RequestHandler = async (request, response, next) 
         const config = makeRouteMakeConfig(query);
 
         // TODO: Maybe incognito context should be ready
-        browserContext = await (config.incognito
-            ? (await browserPromise).createIncognitoBrowserContext() // TODO: What about parallel incognito requests
-            : (await browserPromise).defaultBrowserContext());
+        const browser = await getBrowser();
+        const context = config.incognito
+            ? await browser.createBrowserContext() // TODO: What about parallel incognito requests
+            : browser.defaultBrowserContext();
+        browserContext = context;
 
-        page = await makeDocument(config, browserContext);
+        page = await makeDocument(config, context);
 
         const title = page.title;
         let document: Buffer;
         if (config.type === 'pdf') {
-            document = await page.pdf(cleanupConfigForPdf(config as IMakeConfigPdf));
+            const pdfData = await page.pdf(cleanupConfigForPdf(config as IMakeConfigPdf));
+            document = Buffer.from(pdfData);
         } else {
-            document = (await page.screenshot({
+            const screenshotData = await page.screenshot({
                 ...cleanupConfigForImages(config as IMakeConfigImages),
                 encoding: 'binary',
-            })) as Buffer;
+            });
+            document = Buffer.from(screenshotData);
         }
 
         return response
@@ -63,19 +82,22 @@ export const makeRouteHandler: RequestHandler = async (request, response, next) 
                 }`,
             )
             .send(document);
-    } catch (error) {
+    } catch (error: any) {
         //TODO: handle other type of errors
         if (errorMessage === 'DEBUG') {
-            return response.status(400).send(error.message);
+            return response.status(400).send(error?.message || String(error));
         } else {
             console.error(error);
             return response.status(400).send(errorMessage);
         }
     } finally {
-        if (page) page.close();
-        if (browserContext && browserContext.isIncognito()) {
-            // TODO: What about parallel incognito requests
-            browserContext.close();
+        if (page) await page.close();
+        if (browserContext && browserPromise) {
+            const browser = await browserPromise.catch(() => null);
+            if (browser && browser.defaultBrowserContext() !== browserContext) {
+                // TODO: What about parallel incognito requests
+                await browserContext.close();
+            }
         }
     }
 

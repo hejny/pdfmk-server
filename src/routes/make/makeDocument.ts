@@ -42,9 +42,9 @@ export async function makeDocument(config: IMakeConfig, browserContext: BrowserC
         //return readFileSync(filePath);
 
         // TODO: Delete cache files
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
-        if (error.message.includes('waiting for selector ".renderNow" failed')) {
+        if (error?.message?.includes('waiting for selector ".renderNow" failed')) {
             throw new Error(
                 `Probbably not called window.${config.renderOnCallback} inside the rendered page "${config.url}".`,
             );

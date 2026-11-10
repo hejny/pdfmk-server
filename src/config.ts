@@ -3,7 +3,7 @@ import { PDFOptions } from 'puppeteer';
 const packageJson = require('../package.json');
 export const version = packageJson.version;
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
     // Note: This is just for development:
     require('dotenv').config();
 }
@@ -27,7 +27,10 @@ ALLOWED_DOMAINS.push(`en.wikipedia.org`); // For testing purpose
 export const PUPPETEER_LAUNCH_OPTIONS = config
     .get('PUPPETEER_LAUNCH_OPTIONS')
     .json()
-    .default({}).value;
+    .default({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+    }).value;
 
 /**
  * @deprecated
