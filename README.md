@@ -25,15 +25,94 @@ A very simple tool library for the waiting using Promises.
 - [Client](https://github.com/hejny/pdfmk/)
 - [Server](https://github.com/hejny/pdfmk-server/)
 
-## Deploy
+## ⚙️ Configuration
 
-You need to install Google cloud SDK
+The application reads configuration from environment variables. For local development, it automatically loads `.env` files via `dotenv`. For Cloud Functions deployment, it uses `.env.gcloud`.
 
+### Configuration Files
 
----
-TODO:
+- **[`.env.template`](file:///.env.template)**: Reference template containing all supported environment variables.
+- **[`.env`](file:///.env)**: Local environment configuration (ignored by Git). Copy from template:
+  ```bash
+  cp .env.template .env
+  ```
+- **[`.env.gcloud`](file:///.env.gcloud)**: YAML-formatted configuration file passed directly to `gcloud functions deploy --env-vars-file=.env.gcloud`.
 
-Work for other clouds
+### Environment Variables
+
+| Variable | Format / Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `NODE_ENV` | `development` \| `production` | `development` (local) | Application environment mode. |
+| `SELF_URL` | URL | `http://localhost:8080/` | Base URL of the service. Used by the interactive form at `/` to submit to `/make`. Set to your Cloud Function URL in production. |
+| `ALLOWED_DOMAINS` | Comma-separated list | `""` | Restricts URL rendering to specific domains (e.g. `example.com,mydomain.org`). |
+| `PUPPETEER_LAUNCH_OPTIONS` | JSON String | `{"args":["--no-sandbox",...]}` | Custom options passed to `puppeteer.launch()`. Defaults to safe container flags (`--no-sandbox`, `--disable-setuid-sandbox`, `--disable-dev-shm-usage`). |
+| `PUPPETEER_PDF_OPTIONS` | JSON String | `{"format":"A4",...}` | *(Deprecated)* Fallback PDF options when not provided in the query string. |
+
+## 🚀 Deploy to Google Cloud Functions
+
+### Prerequisites
+
+1. **Install and authenticate Google Cloud SDK**:
+   ```bash
+   gcloud auth login
+   gcloud auth application-default login
+   ```
+2. **Set your target GCP project**:
+   ```bash
+   gcloud config set project YOUR_PROJECT_ID
+   ```
+3. **Enable required Google Cloud APIs** (if deploying for the first time):
+   ```bash
+   gcloud services enable cloudfunctions.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com run.googleapis.com
+   ```
+4. **Configure production variables**:
+   Edit [`.env.gcloud`](file:///.env.gcloud) and set your target `SELF_URL`:
+   ```yaml
+   SELF_URL: "https://europe-west3-YOUR_PROJECT_ID.cloudfunctions.net/pdfmaker"
+   ```
+
+### Deployment Steps
+
+1. **Deploy using the npm script** (automatically builds TypeScript and applies `.env.gcloud`):
+   ```bash
+   npm run deploy
+   ```
+
+2. **Or deploy manually with `gcloud`**:
+   ```bash
+   npm run build
+   gcloud functions deploy pdfmaker \
+     --gen2 \
+     --runtime nodejs26 \
+     --region europe-west3 \
+     --memory 2048MiB \
+     --timeout 120s \
+     --trigger-http \
+     --allow-unauthenticated \
+     --entry-point pdfmaker \
+     --env-vars-file .env.gcloud
+   ```
+
+   *Notes on deployment flags:*
+   - `--env-vars-file`: Loads production environment variables from `.env.gcloud`.
+   - `--memory`: Headless Chromium (Puppeteer) requires adequate RAM (minimum 1024MB, 2048MiB recommended).
+   - `--timeout`: PDF generation for complex pages can take tens of seconds; 120s timeout is recommended.
+   - `--allow-unauthenticated`: Permits public HTTP access without IAM authentication. Omit if you require Google Cloud IAM authentication.
+
+### Development & Logs
+
+- **Run locally with Functions Framework emulator**:
+  ```bash
+  npm run start
+  # or
+  npm run develop
+  ```
+- **Inspect live logs**:
+  ```bash
+  npm run logs
+  # or
+  gcloud functions logs read pdfmaker --region europe-west3
+  ```
 
 ## ⤴️ Motivation
 ## 📖 Usage

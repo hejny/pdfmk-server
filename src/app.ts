@@ -1,4 +1,3 @@
-import { json } from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import http from 'http';
@@ -10,7 +9,7 @@ import { testHttpStatusCodeRouteHandler } from './routes/testHttpStatusCodeRoute
 export function createApp(): { app: express.Application; server: http.Server } {
     const app = express();
 
-    app.use(json());
+    app.use(express.json());
     app.use(cors());
 
     const server = http.createServer(app);

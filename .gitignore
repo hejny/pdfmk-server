@@ -13,8 +13,10 @@ dist
 
 /bin
 /cache
+/.cache
 
 .env
+.env.gcloud
 
 # Other
 preconvert.txt
